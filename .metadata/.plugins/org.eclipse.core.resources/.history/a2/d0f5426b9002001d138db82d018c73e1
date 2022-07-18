@@ -1,0 +1,12 @@
+package kr.ac.kopo.controller;
+
+import javax.servlet.http.HttpServlet;
+
+public class FrontControllerServlet extends HttpServlet{
+	
+	private HadlerMapping mappings;
+	
+	
+	
+
+}

@@ -1,0 +1,10 @@
+package kr.ac.kopo.controller;
+
+public interface Controller {
+
+
+	String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+
+	
+}

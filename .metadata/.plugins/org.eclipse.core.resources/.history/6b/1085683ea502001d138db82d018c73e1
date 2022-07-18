@@ -1,0 +1,7 @@
+/board/list.do=kr.ac.kopo.controller.BoardListController
+/board/writeForm.do=kr.ac.kopo.controller.BoardWriteFormController
+/board/write.do=kr.ac.kopo.controller.BoardWriteController
+/login.do=kr.ac.kopo.controller.LoginController
+/loginProcess.do=kr.ac.kopo.controller.LoginProcessController
+/Member/join.do=kr.ac.kopo.controller.JoinController
+/Member/DashBoard.do=kr.ac.kopo.controller.DashBoardController

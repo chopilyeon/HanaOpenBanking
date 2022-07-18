@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.onlyme{
+	background:url('/images/city.jpg');
+	background-size:cover;
+	
+}

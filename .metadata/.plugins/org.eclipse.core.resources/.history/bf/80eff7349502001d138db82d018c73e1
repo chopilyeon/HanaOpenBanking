@@ -1,0 +1,5 @@
+package kr.ac.kopo.login.dao;
+
+public class LoginDao {
+
+}

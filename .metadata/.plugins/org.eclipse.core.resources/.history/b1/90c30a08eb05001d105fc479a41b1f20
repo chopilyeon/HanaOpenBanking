@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="dao.BankDAO">
+<resultMap type="bankVO" id="bankMap">
+   	    <result column ="id" property="id"/>
+		<result column ="account_number" property="accountNumber"/>
+		<result column ="account_password" property="accountPassword"/>
+		<result column ="bank_code" property="bankCode"/>
+		<result column ="bank_reg_date" property="bankRegDate"/>
+		<result column ="balance" property="balance"/>
+		<result column ="bank_alias" property="bankAlias"/>
+		<result column ="transfer_limit" property="transferLimit"/>
+		<result column ="bank_name" property="bankName"/>		
+</resultMap>
+	
+	
+	
+	
+	<insert id="insertBank" parameterType="bankVO">
+		insert into account(id,account_number,account_password,bank_code,balance,bank_alias,transfer_limit)
+		values(#{id},#{accountNumber},#{accountPassword},#{bankCode},#{balance},#{bankAlias},#{transferLimit})
+	</insert>
+	
+	<select id="checkoutBank" parameterType="bankVO" resultMap="bankMap">
+		select id, account_number, account_password, A.bank_code as bank_code, to_char(bank_reg_date,'YYYY-MM-DD HH:MI:SS') as bankRegDate, balance, bank_alias, transfer_limit, B.bank_name as bankName 
+		 	from account A, bank_code B 
+		 	where A.bank_code=B.bank_code and A.id=#{id}
+	</select>
+	
+	<select id="checkoutBKBANK" parameterType="bankVO" resultMap="bankMap">
+		select id, account_number, account_password, A.bank_code as bank_code, to_char(bank_reg_date,'YYYY-MM-DD HH:MI:SS') as bankRegDate, balance, bank_alias, transfer_limit, B.bank_name as bankName 
+		 	from account A@2, bank_code B 
+		 	where A.bank_code=B.bank_code and A.id=#{id}
+	</select>
+	
+	<select id="checkoutJHBANK" parameterType="bankVO" resultMap="bankMap">
+		select id, account_number, account_password, A.bank_code as bank_code, to_char(bank_reg_date,'YYYY-MM-DD HH:MI:SS') as bankRegDate, balance, bank_alias, transfer_limit, B.bank_name as bankName 
+		 	from account A@9, bank_code B 
+		 	where A.bank_code=B.bank_code and A.id=#{id}
+	</select>
+	
+	<select id="checkoutJBBANK" parameterType="bankVO" resultMap="bankMap">
+		select id, account_number, account_password, A.bank_code as bank_code, to_char(bank_reg_date,'YYYY-MM-DD HH:MI:SS') as bankRegDate, balance, bank_alias, transfer_limit, B.bank_name as bankName 
+		 	from account A@14, bank_code B 
+		 	where A.bank_code=B.bank_code and A.id=#{id}
+	</select>
+	
+	
+	
+	<select id="checkAccountBANK" parameterType="string" resultType="string">
+		select bank_code from account
+		where account_number = #{anything}  
+	</select>
+	
+	<select id="checkAccountBKBANK" parameterType="string" resultType="string">
+		select bank_code from account@2
+		where account_number = #{anything}  
+	</select>
+	
+	<select id="checkAccountJBBANK" parameterType="string" resultType="string">
+		select bank_code from account@14
+		where account_number = #{anything}  
+	</select>
+	
+	<select id="checkAccountJHBANK" parameterType="string" resultType="string">
+		select bank_code from account A@9
+		where account_number = #{anything}  
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<update id="transferToMyAccount" parameterType="map">
+	 BEGIN
+   		 UPDATE ACCOUNT SET BALANCE=BALANCE-to_number(#{remittance}) WHERE ACCOUNT_NUMBER=#{withrawalAccount};
+    	 UPDATE ACCOUNT SET BALANCE=BALANCE+#{remittance} WHERE ACCOUNT_NUMBER=#{depositAccount};
+    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,INSERT_ACCOUNT_NUM, DEPOSIT_NAME, INSERT_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,INSERT_BANK_CODE)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},${tranAmount},'20','20')
+    	 COMMIT;
+	 EXCEPTION
+     WHEN OTHERES THEN 
+     ROLLBACK;
+	 END;
+	 /    
+	</update>
+	
+	
+		
+	<update id="transferToMyAccount" parameterType="map">
+	 BEGIN
+   		 UPDATE ACCOUNT SET BALANCE=BALANCE-to_number(#{remittance}) WHERE ACCOUNT_NUMBER=#{withrawalAccount};
+    	 UPDATE ACCOUNT SET BALANCE=BALANCE+#{remittance} WHERE ACCOUNT_NUMBER=#{depositAccount};
+    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},${tranAmount},#{depositBankCode},#{withrawalBankCode})
+    	 COMMIT;
+	 EXCEPTION
+     WHEN OTHERES THEN 
+     ROLLBACK;
+	 END;
+	 /    
+	</update>
+	
+	
+	
+	
+	
+	
+		
+	
+	
+	
+	
+</mapper>		

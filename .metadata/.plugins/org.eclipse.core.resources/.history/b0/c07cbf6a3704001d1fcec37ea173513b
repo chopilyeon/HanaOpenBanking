@@ -1,0 +1,15 @@
+package kr.ac.kopo.bank.service;
+
+import kr.ac.kopo.bank.dao.BankDAO;
+
+public class BankService {
+	
+	private BankDAO bankDao;
+
+	
+	
+	public void insertAccount(BankVO bankvo) {
+		
+	}
+	
+}
