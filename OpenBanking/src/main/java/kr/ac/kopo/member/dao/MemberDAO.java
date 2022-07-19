@@ -26,6 +26,16 @@ public class MemberDAO {
 	 	 
 	 return userVO;	 
 	}
+	
+	public MemberVO APILogin(String name) {	 		
+		 System.out.println(name);	 	 
+		 MemberVO userVO = session.selectOne("dao.MemberDAO.APISignIn",name);	 
+		 System.out.println(userVO.toString());
+		 	 
+		 return userVO;	 
+		}
+	
+	
 
 	
 	public void join(MemberVO memberVO) {

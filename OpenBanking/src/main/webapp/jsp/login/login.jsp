@@ -35,12 +35,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
 <script>
 
-
-
-
-	
 document.addEventListener("DOMContentLoaded",()=>{
  	document.getElementById("click").click();
  	document.getElementById("click").style.display = 'none';
@@ -63,17 +61,50 @@ document.addEventListener("DOMContentLoaded",()=>{
  });
  
 
-
-
-
-
 </script>
 
-  
-  
-    
-    
-    
+
+<script>
+Kakao.init('2a5469364f4e047b9ce872e670e9dadb'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+        	  location.href = '${pageContext.request.contextPath}/loginProcess.do?kakaoName='+response.properties.nickname+'&email='+response.kakao_account.email
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        	location.href = '${pageContext.request.contextPath}/logout.do'
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  }  
+</script>
+
     
 </head>
 <body>
@@ -129,7 +160,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       <img src="/OpenBanking/resources/images/naver.png" alt="user-img" class="img-circle" width="30">
     </button>
 
-    <button type="button" class="btn btn-link btn-floating mx-1">
+    <button type="button" class="btn btn-link btn-floating mx-1" onclick="kakaoLogin();">
    	 <img src="/OpenBanking/resources/images/kakao.png" alt="user-img" class="img-circle" width="30">
     </button>
   </div>

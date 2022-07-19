@@ -51,36 +51,43 @@
 	</h1>
 	<hr>
 
-	<div class="social-box m-5 p-5">
+	<div class="social-box m-2 p-2">
 	    <div class="container">
 	     	<div class="row m-5">
 	     	<c:forEach items="${ bankList }" var="bankList" varStatus="loop">
+	     	
 			    <div class="col-lg-6 col-xs-12 text-center">
 					<div class="box border border-4 rounded-3 m-5 w-75">
+					<div>
+  						<img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage" />
+					</div>
 	                    <i class="fa fa-behance fa-3x" aria-hidden="true"></i>
 						<div class="box-title">
 							<h3>${ bankList.bankAlias }</h3>
 						</div>					
+						<hr>
 						<div class="box-text m-2">
 							<h3>
 							BALANCE
 							</h3>
-							<h5>${ bankList.balance }</h5>
+							<h5>${ bankList.balance } WON</h5>
 						</div>
-						
+						<hr>
 						<div class="box-btn">
 							<h3>
 							TRANSFER LIMIT
 							</h3>
-						    <h5>${ bankList.transferLimit }</h5>
+						    <h5>${ bankList.transferLimit } WON</h5>
 						</div>
-						
+						<hr>
 						<div class="box-btn">
 							<h3>
 							BANK NAME
 							</h3>
+							
 						    <h5>${ bankList.bankName }</h5>
 						</div>
+						<hr>
 						<div class="box-btn">
 							<h3>
 							ACCOUNT NUMBER

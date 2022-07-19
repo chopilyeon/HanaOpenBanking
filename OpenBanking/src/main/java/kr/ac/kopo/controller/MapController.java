@@ -7,8 +7,8 @@ public class MapController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return "/jsp/map/map.js";
+	
+		return "/jsp/map/map.jsp";
 	}
 
 }

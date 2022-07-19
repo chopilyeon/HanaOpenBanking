@@ -1,114 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>J investment bank</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="/OpenBanking/resources/images/img/favicon.png" rel="icon">
-  <link href="/OpenBanking/resources/images/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="/OpenBanking/resources/css/animate.min.css" rel="stylesheet">
-  <link href="/OpenBanking/resources/css/aos.css" rel="stylesheet">
-  <link href="/OpenBanking/resources/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/OpenBanking/resources/css/bootstrap-icons.css" rel="stylesheet">
-  <link href="/OpenBanking/resources/css/boxicons.min.css" rel="stylesheet">
-  <link href="/OpenBanking/resources/css/glightbox.min.css" rel="stylesheet">
-  <link href="/OpenBanking/resources/css/swiper-bundle.min.css" rel="stylesheet">
-<!--   <link href="/OpenBanking/resources/css/onlyForMe.css" rel="stylesheet"> -->
-  
-  
-   
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>J investment bank</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/OpenBanking/resources/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="/OpenBanking/resources/css/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/OpenBanking/resources/css/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="/OpenBanking/resources/css/style.min.css" rel="stylesheet">
+    <link href="/OpenBanking/resources/css/onlyForMe.css" rel="stylesheet">
+    
+    
  <!-- FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
 
-  <!-- Template Main CSS File -->
-  <link href="/OpenBanking/resources/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Moderna - v4.8.0
-  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
-
 <body>
+ 	<jsp:include page="/jsp/include/topAndSide.jsp" />
+<section>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
-    <div class="container d-flex justify-content-between align-items-center">
-
-      <div class="logo">
-        <h1 class="text-light"><a href="#"><img src="/OpenBanking/resources/images/J_LOGO.png" alt="homepage" width="50">INVESTMENT BANK</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="active " href="${pageContext.request.contextPath}/Member/join.do">SIGN UP</a></li>
-        </ul>
-         <ul>
-          <li><a class="active " href="${pageContext.request.contextPath}/login.do">SIGN IN</a></li>
-        </ul>
-        
-         <ul>
-          <li><a class="active " href="${pageContext.request.contextPath}/login.do">  Forgot your password?</a></li>
-        </ul>
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active carousel-image-1">.
+    </div>
+    <div class="carousel-item carousel-image-2">
+    </div>
+    <div class="carousel-item carousel-image-3">
  
-        
-        
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
     </div>
-  </header><!-- End Header -->
+  </div>
+</div>
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex justify-cntent-center align-items-center onlyme">
-    <div id="heroCarousel" class="container carousel carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
-      <!-- Slide 1 -->
-      <div class="carousel-item active">
-        <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">Welcome to <span>J INVESTMENT BANK</span></h2>
-          <p class="animate__animated animate__fadeInUp">J INVESTMENT BANK</p>
-          <a href="${pageContext.request.contextPath}/login.do" class="btn-get-started animate__animated animate__fadeInUp">SIGN IN</a>
-        </div>
-      </div>
-    </div>
-  </section><!-- End Hero -->
 
-  <!-- Vendor JS Files -->
-  <script src="/OpenBanking/resources/js/purecounter.js"></script>
-  <script src="/OpenBanking/resources/js/aos.js"></script>
-  <script src="/OpenBanking/resources/js/bootstrap.bundle.min.js"></script>
-  <script src="/OpenBanking/resources/js/glightbox.min.js"></script>
-  <script src="/OpenBanking/resources/js/isotope.pkgd.min.js"></script>
-  <script src="/OpenBanking/resources/js/swiper-bundle.min.js"></script>
-  <script src="/OpenBanking/resources/js/noframework.waypoints.js"></script>
-  <script src="/OpenBanking/resources/js/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="/OpenBanking/resources/js/main.js"></script>
-  
-  
-  
-  
 		<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary" id="trigger" data-bs-toggle="modal" data-bs-target="#exampleModal">
  		 Launch demo modal
@@ -120,17 +59,50 @@
   		<div class="modal-dialog">
     		<div class="modal-content py-5">
     			 <div class="modal-body">
-     	 			 <p class="fs-6 text-center">TRANSFER IS COMPLETE</p>
+     	 			 <p class="fs-6 text-center">TRANSFER COMPLETED</p>
      	  		
-     	 			 <p class="fs-6 text-center">THANK YOU<p>
+     	 			 <p class="fs-6 text-center">THANK YOU ${userVO.id}! <p>
    
+     
      	   
      			</div>
    			 </div>
   		</div>
 	</div>
-  
- 	
+
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <jsp:include page="/jsp/include/footer.jsp" />
+  	
 <script>
 
 	
@@ -153,11 +125,29 @@ document.addEventListener("DOMContentLoaded",()=>{
  	
  });
 
-</script>  
-  
-  
-  
+</script>
+
+
+
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+ <script src="/OpenBanking/resources/js/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/OpenBanking/resources/js/bootstrap.bundle.min.js"></script>
+    <script src="/OpenBanking/resources/js/app-style-switcher.js"></script>
+    <script src="/OpenBanking/resources/js/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="/OpenBanking/resources/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/OpenBanking/resources/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/OpenBanking/resources/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="/OpenBanking/resources/js/chartist.min.js"></script>
+    <script src="/OpenBanking/resources/js/chartist-plugin-tooltip.min.js"></script>
+    <script src="/OpenBanking/resources/js/dashboard1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
 </body>
-
 </html>

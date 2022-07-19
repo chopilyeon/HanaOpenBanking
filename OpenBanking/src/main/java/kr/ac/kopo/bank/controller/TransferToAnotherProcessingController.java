@@ -49,11 +49,11 @@ public class TransferToAnotherProcessingController implements Controller {
 		
 		
 		
-		if(depositBankName.equals("BYUNGKWAN_BANK")) {
+		if(depositBankName.equals("BK_BANK")) {
 			depositBankCode="2";
-		}else if(depositBankName.equals("JUNGBIN_BANK")) {
+		}else if(depositBankName.equals("BERRY_BANK")) {
 			depositBankCode="14";		
-		}else if(depositBankName.equals("JIHUN_BANK")) {
+		}else if(depositBankName.equals("JH_BANK")) {
 			depositBankCode="9";			
 		}else {
 			depositBankCode="20";
@@ -67,6 +67,7 @@ public class TransferToAnotherProcessingController implements Controller {
 		
 		
 		 Map<String,String> map = new HashMap<>();
+		 
 		 map.put("withrawalBankName", withrawalBankName);
 		 map.put("withrawalBankCode", withrawalBankCode);
 		 map.put("depositBankName", depositBankName);

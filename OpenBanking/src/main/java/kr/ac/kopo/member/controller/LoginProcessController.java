@@ -19,6 +19,10 @@ public class LoginProcessController implements Controller {
 
 		request.setCharacterEncoding("utf-8");
 		
+		String kakaoName = request.getParameter("kakaoName");
+		MemberVO userVO;
+		
+		
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		
@@ -32,8 +36,11 @@ public class LoginProcessController implements Controller {
 		MemberService memberService = new MemberService();
 		BankService bankService = new BankService();
 		
-		MemberVO userVO = memberService.login(memberVO);
-		
+		if(kakaoName==null) {
+			userVO = memberService.login(memberVO);
+		}else {
+			userVO = memberService.APILogin(kakaoName);
+		}
 		
 		BankVO bankVO = new BankVO(userVO.getPhoneNumber());
 		

@@ -45,16 +45,17 @@
 	<section>
 	
 	
-<form class="border">	
+<form class="border" action="${pageContext.request.contextPath}/bank/transferToOtherAccountProcess.do" method="post">	
 <input type="hidden" name ="withrawalName" value="${userVO.name}">
-	<div class="social-box m-5 p-5">
-	    <div class="container">
-	     	<div class="row m-5">
+	<div class="social-box">
+	    <div class="container  d-flex justify-content-center">
+	     	<div class="row">
 			    <div class="col-lg-12 col-xs-12 text-center">
-					<div class="box border border-5 rounded-3 m-5 w-75">
+					<div class="box border border-5 rounded-3 mt-5">
 	                    <i class="fa fa-behance fa-3x" aria-hidden="true"></i>
+	                      <img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage" />
 						<div class="box-title">
-							<h2>TRANSFER TO MY ACCOUNT</h2>
+							<h2>TRANSFER TO OTHER ACCOUNT</h2>
 						</div>
 						<hr>		
 						<div class="box-text m-3 border">
@@ -67,35 +68,50 @@
 						</div>	
 						<div class="box-text m-3 border">
 							<h4 class="mt-3">WITHRAWAL ACCOUNT NUMBER</h4>
-							<select class="mb-3" name="withrawalAccountNumber">
+							<select class="mb-3 form-select" name="withrawalAccountNumber">
 								<option value="none">withrawalAccountNumber</option>
 								<c:forEach items="${ bankList}" var="bankList">
-									<option value="${bankList.accountNumber}">{bankList.bankName} ${bankList.accountNumber}</option>
+									<c:choose>
+										<c:when test="${userVO.openBanking eq 'Y'}">									
+											<option value="${bankList.accountNumber}">[${bankList.bankName}] ${bankList.accountNumber}</option>
+										</c:when>
+										<c:otherwise>
+											<c:if test="${bankList.bankName eq 'J INVESTMENT BANK' }">
+											<option value="${bankList.accountNumber}">[${bankList.bankName}] ${bankList.accountNumber}</option>
+											</c:if>
+										</c:otherwise> 
+									</c:choose>		
 								</c:forEach>
 							</select>
 						</div>	
 						<div class="box-text m-3 border">
 						<h4 class="mt-3">DEPOSIT BANK NAME</h4>
-							<select class="mb-3" name="depositBankName">
+							<select class="mb-3 form-select" name="depositBankName">
 								<option value="none">SELECT BANK</option>
-								<option value="BYUNGKWAN BANK">BYUNGKWAN_BANK</option>
-								<option value="JUNGBIN BANK">JUNGBIN_BANK</option>
-								<option value="JIHUN BANK">JIHUN_BANK</option>			
+								<option value="J INVESTMENT BANK">J INVESTMENT BANK</option>
+								<option value="BYUNGKWAN_BANK">BYUNGKWAN_BANK</option>
+								<option value="JUNGBIN_BANK">JUNGBIN_BANK</option>
+								<option value="JIHUN_BANK">JIHUN_BANK</option>			
 							</select>
 						</div>
-						<div class="box-text m-3 border">
-						<h4 class="mt-3">DEPOSIT ACCOUNT NUMBER</h4>
-							<input type="text" name="depositAccountNumber" class="mb-3" >	
+						<div class="input-group input-group-sm mb-3">
+						  <span class="input-group-text" id="inputGroup-sizing-sm">DEPOSIT ACCOUNT NUMBER</span>
+  						  <input type="text" name="depositAccountNumber" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 						</div>
-						<div class="box-text m-3 border">
-						<h4 class="mt-3">DEPOSIT NAME</h4>
-							<input type="text" name="depositName" class="mb-3" >	
-						</div>		
-																	
-						<div class="box-text m-3 border">
-						<h4 class="mt-3">REMITTANCE</h4>
-							<input type="number" name="tranAmount" class="mb-3" >	
+						
+						
+						<div class="input-group input-group-sm mb-3">
+						  <span class="input-group-text" id="inputGroup-sizing-sm">NAME OF DEPOSITOR</span>
+  						  <input type="text" name="depositName" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 						</div>
+						
+								
+						<div class="input-group container w-50">
+ 							 <input type="number" name="tranAmount" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+  							 <span class="input-group-text">WON</span>
+ 							
+						</div>
+						<button type="SUBMIT" class="btn btn-primary mt-2 w-25">TRANSFER</button>		
 										 
 					</div>	 
 				</div>

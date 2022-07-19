@@ -1,9 +1,9 @@
 package kr.ac.kopo.transaction.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.ac.kopo.transaction.dao.TransactionDAO;
-import kr.ac.kopo.transaction.vo.TransactionVO;
 
 public class TransactionService {
 	private TransactionDAO transactionDao;
@@ -13,9 +13,9 @@ public class TransactionService {
 	}
 	
 	
-	public List<TransactionVO> checkoutTransaction(String phoneNumber){
+	public List<Map<String, Object>> checkoutTransaction(String phoneNumber){
 		
-		List<TransactionVO> transactionList = transactionDao.checkoutTransaction(phoneNumber);
+		List<Map<String, Object>> transactionList = transactionDao.checkoutTransaction(phoneNumber);
 		return transactionList;
 	}
 	

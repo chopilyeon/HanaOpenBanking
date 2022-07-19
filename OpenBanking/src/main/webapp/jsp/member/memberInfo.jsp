@@ -51,7 +51,16 @@
 	<h1>${userVO.id}'S INFORMATION</h1>
 	<hr>
 	<br>
-	<table border="1" style="width:80%" class="m-5 table table-striped w-25">
+	
+	<div>
+	
+		<div>
+  			<img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage" />
+		</div>
+	
+	
+	
+	<table border="5" style="width:80%" class="m-5 table   w-25">
 		<tr>
 			<th width="25%">NAME</th>
 			<td>${userVO.name}</td>
@@ -104,7 +113,7 @@
 	
 	</table>
 	
-
+	</div>
 
 	
 	

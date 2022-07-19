@@ -42,32 +42,136 @@
 
 	<jsp:include page="/jsp/include/topAndSide.jsp" />
 	
-<section>
-	
-	${transactionList.tranNum}
+<section class="mt-5">
+<div class="d-flex justify-content-center mt-5">
 
-	${transactionList.withrawalBankCode}
+			<div class="container">
+				<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-11">
+				<table  class="table" style="width:100%;">
+			  	<thead>
+					<tr class="table-light">
+						<th width="3%" class="">#</th>
+						<th width="10%" class="">DATE</th>
+						<th width="30%" class="">WITHRAWAL BANK</th>
+						<th width="16%" class="">DEPOSIT BANK</th>
+						<th width="30%" class="">WITHRAWAL ACCOUNT</th>
+						<th width="50%" class="">DEPOSIT ACCOUNT</th>
+						<th width="10%" class="">SENDER </th>
+						<th width="10%" class="">DEPOSITOR</th>
+						<th width="10%" class="">AMOUNT</th>
+						
+					</tr>
+			  </thead>	
+		<tbody class="table-group-divider">
+				<c:forEach items="${ transactionList}" var="transactionList" varStatus="loop">
+					<tr>
+					 	<td class="table-light">${ transactionList['TRANNUM'] }</td>
+						<td class="table-light">${ transactionList['TRANDATE']}</td>
+						<td class="table-light">${ transactionList['WITHRAWALBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALNAME']}</td>
+						<td class="table-light">${ transactionList['DEPOSITNAME'] }</td>
+						<td class="table-light">${ transactionList['TRANAMOUNT'] }</td>					 
+					</tr>
+				</c:forEach>
+		</tbody>
+		</table>
+					</div>
+				</div>
+			</div>
+			</div>
+			<%-- <table  class="table btn" >
+			  	<thead>
+					<tr class="table-light">
+						<th width="10%" class="">TRANSACTION NUMBER</th>
+						<th width="10%" class="">TRANSACTION DATE</th>
+						<th width="16%" class="">WITHRAWAL BANK</th>
+						<th width="16%" class="">DEPOSIT BANK</th>
+						<th width="16%" class="">WITHRAWAL ACCOUNT NUMBER</th>
+						<th width="16%" class="">DEPOSIT ACCOUNT NUMBER</th>
+						<th width="10%" class="">SENDER </th>
+						<th width="10%" class="">DEPOSITOR</th>
+						<th width="10%" class="">AMOUNT</th>
+						
+					</tr>
+			  </thead>	
+		<tbody class="table-group-divider">
+				<c:forEach items="${ transactionList}" var="transactionList" varStatus="loop">
+					<tr>
+					 	<td class="table-light">${ transactionList['TRANNUM'] }</td>
+						<td class="table-light">${ transactionList['TRANDATE']}</td>
+						<td class="table-light">${ transactionList['WITHRAWALBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALNAME']}</td>
+						<td class="table-light">${ transactionList['DEPOSITNAME'] }</td>
+						<td class="table-light">${ transactionList['TRANAMOUNT'] }</td>					 
+					</tr>
+				</c:forEach>
+		</tbody>
+		</table>
+		</div>
 
-	${transactionList.depositBankCode}
-
-	${transactionList.withrawalName}
-
-	${transactionList.withrawalAccountNum}
-
-	${transactionList.depositName}
-
-	${transactionList.depositAccountNum}
-
-	${transactionList.tranAmount}
-
-	${transactionList.tranDate}
-	
-	${transactionList.depositBankName}
-	
-	${transactionList.withrawalBankName}
+				
+				 --%>
+				
 					
+	<%-- 
+	
+		</table>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div>
+		<table style="width:50%" class="table btn">
+			  	<thead>
+					<tr class="table-light p-5">
+						<th width="16%" class="p-5">TRANSACTION NUMBER</th>
+						<th width="16%" class="p-5">TRANSACTION DATE</th>
+						<th width="16%" class="p-5">WITHRAWAL BANK</th>
+						<th width="16%" class="p-5">DEPOSIT BANK</th>
+						<th width="40%" class="p-5">WITHRAWAL ACCOUNT NUMBER</th>
+						<th width="40%" class="p-5">DEPOSIT ACCOUNT NUMBER</th>
+						<th width="40%" class="p-5">SENDER </th>
+						<th width="40%" class="p-5">DEPOSITOR</th>
+						<th width="40%" class="p-5">AMOUNT</th>
+						
+					</tr>
+			  </thead>	
+		<tbody class="table-group-divider">
+				<c:forEach items="${ transactionList}" var="transactionList" varStatus="loop">
+					<tr>
+					 	<td class="table-light">${ transactionList['TRANNUM'] }</td>
+						<td class="table-light">${ transactionList['TRANDATE']}</td>
+						<td class="table-light">${ transactionList['WITHRAWALBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALNAME']}</td>
+						<td class="table-light">${ transactionList['DEPOSITNAME'] }</td>
+						<td class="table-light">${ transactionList['TRANAMOUNT'] }</td>					 
+					</tr>
+				</c:forEach>
+		</tbody> --%>
+		
+					
+				
+				
+				
+					
+	
+<!-- 	
+		</table>
+	</div>				
 
-
+ -->
 	
 	
 	

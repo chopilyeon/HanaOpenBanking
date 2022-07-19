@@ -49,7 +49,15 @@
 	
 	
 	
-	${pageContext.request.contextPath}/board/answerProcess.do
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

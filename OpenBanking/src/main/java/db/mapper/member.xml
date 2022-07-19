@@ -33,9 +33,20 @@
 		  where id=#{id}
 	</select>
 	
+		
+	<select id ="APISignIn" parameterType="string" resultMap="memberMap">
+		select name,password,identity,id,gender,phone_number,address,detail_address,type,zip_code,reg_date, open_banking 
+		  from customer 
+		  where name=#{name}
+	</select>
+	
+	
+	
 	<update id="consentOpenBanking" parameterType="memberVO">
 		update customer set open_banking='Y' where id=#{id}
 	</update>
+	
+	
 	
 	
 

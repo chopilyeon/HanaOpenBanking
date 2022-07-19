@@ -37,13 +37,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
 <script>
-	function checkLogin(boardNo){
-
-
-					
-			
+	function checkLogin(boardNum){	
+		<c:choose>
+		<c:when test="${empty userVO}">
+			if(confirm('로그인 후 사용이 가능합니다\n 로그인 페이지로 이동할까요?')){
+				location.href="${pageContext.request.contextPath}/login.do"
+			}
+				
+				
+		
+		</c:when>
+		<c:otherwise>
+			location.href='${pageContext.request.contextPath}/board/detail.do?boardNo='+ boardNum
+		</c:otherwise>
 	
-				location.href='detail.jsp?no=' + boardNo
+		</c:choose>  
 	} 
 
 </script>
@@ -59,15 +67,22 @@
 	
 	
 	
-	<section>
+	<section class="mt-5">
 	<hr>
 		<h2 class="text-center">Q & A </h2>	
 	<hr>
 	<c:if test="${userVO.type eq 'U' }">
-		<button type="button" class="btn btn-outline-dark">WRITE QUESTION</button>
+		<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/board/writeForm.do';">WRITE QUESTION</button>
 	</c:if>
+
 	
 	<div class="d-flex justify-content-center">
+	
+			<div class="container">
+				<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-11">
+	
 		<table style="width:60%" class="table btn float-left">
 			  	<thead>
 					<tr class="table-light p-5">
@@ -75,37 +90,39 @@
 						<th width="16%" class="p-5">제목</th>
 						<th width="16%" class="p-5">작성자</th>
 						<th width="40%" class="p-5">등록일</th>
+						<th width="40%" class="p-5">조회수</th>
 					</tr>
 			  </thead>	
 		<tbody class="table-group-divider">
-				<c:forEach items="${ boardList }" var="board" varStatus="loop">
+				<c:forEach items="${ boardList }" var="boardList" varStatus="loop">
 					<tr>
-						<td class="table-light">${ board.no }</td>
+						<td class="table-light">${ boardList.boardNum }</td>
 						<td class="table-light">
-						<a href="javascript:checkLogin(${board.no })"> 
-						<c:out value="${board.title }" /> 
-						</a></td>
-						<td class="table-light">${ board.writer }</td>
+						<a href="javascript:checkLogin(${board.boardNum })"> <c:out value="${board.title }" />
+						</a>
+						</td>
+						<td class="table-light">${ board.id }</td>
 						<td class="table-light">${ board.regDate }</td>
+						<td class="table-light">${ board.viewCnt }</td>
 					</tr>
 				</c:forEach>
 		</tbody>
 		
 				
-				
-				
-				
-					
-	
 	
 		</table>
+	</div>
+		
+		
 		<c:if test="${userVO.type eq 'A' }">
 				<button id="addBtn"><a href="${pageContext.request.contextPath}/board/answer.do">답변하기</a></button>
 		</c:if>
 		
+				</div>
+	
+	
+			</div>
 	</div>
-	
-	
 	
 	
 	

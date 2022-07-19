@@ -27,6 +27,13 @@ public class MemberService {
 		System.out.println(userVO.toString());
 		return userVO;
 	}
+	
+	public MemberVO APILogin(String name) {
+		MemberVO userVO = memberDao.APILogin(name);
+		System.out.println(userVO);
+		return userVO;
+	}
+	
 
 
 	

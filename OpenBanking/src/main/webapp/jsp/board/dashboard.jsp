@@ -57,7 +57,7 @@
             <!-- ============================================================== -->
             <div class="page-breadcrumb bg-white">
                 <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 mt-5">
                         <h4 class="page-title">ASSET STATUS</h4>
                     </div>
                     <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
@@ -81,7 +81,8 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
-                            <h3 class="box-title">J bank's account</h3>
+                        	 <img src="/OpenBanking/resources/images/bank.png" width="50" alt="homepage" />
+                            <h3 class="box-title">MY ACCOUNT</h3>
                             <ul class="list-inline two-part mb-0">
                                 <li>
                                    <%--  <div id="sparklinedash"><canvas width="67" height="30"
@@ -90,7 +91,13 @@
  --%>                           </li>
                                 <c:forEach items="${ bankList}" var="bankList">                                	                     	
                                 	<div>
- 									<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5>${bankList.bankAlias}	${bankList.accountNumber}</h5></li>                              
+ 									<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5 class="fw-bold text-dark">${bankList.bankName} ${bankList.bankAlias}	${bankList.accountNumber} 
+ 									<p>
+ 									balance: ${bankList.balance } WON
+ 									</p>
+ 									</h5></li>   
+ 									                           
+                                	</span>
                                 	</div>                                	
                            		</c:forEach>
                            
@@ -99,6 +106,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
+                         <img src="/OpenBanking/resources/images/bank.png" width="50" alt="homepage" />
                             <h3 class="box-title">transfer limit</h3>
                             <ul class="list-inline two-part mb-0">
                                 <li>
@@ -108,7 +116,11 @@
                                 </li>
                                   <c:forEach items="${ bankList}" var="bankList">                                	                     	
                                 	<div>
- 									<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5>account: ${bankList.accountNumber} transfer limit: ${bankList.transferLimit}</h5></li>                              
+ 									<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5 class="fw-bold text-dark">account: ${bankList.accountNumber} 
+ 									<p>
+ 									transfer limit: ${bankList.transferLimit} WON
+ 									</p>
+ 									</h5></li>                              
                           
                                 	</div>   
                                       	
@@ -119,6 +131,7 @@
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
+                          <img src="/OpenBanking/resources/images/bank.png" width="50" alt="homepage" />
                             <h3 class="box-title">total balance on open banking</h3>
                             <ul class="list-inline two-part d-flex align-items-center mb-0">
                                 <li>
@@ -136,7 +149,7 @@
 								</c:forEach>
         
                                 
-                                <li class="ms-auto"><span class="counter text-info"><c:out value="${sum}"/></span>
+                                <li class="ms-auto"><span class="counter text-info"><c:out value="${sum}"/> WON</span>
                                 
                                 
                                 
@@ -153,22 +166,53 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
                         <div class="white-box">
-                            <h3 class="box-title">RECENT TRANSACTION</h3>
+                       
+                            <h1 class="box-title">way to come</h1>
+                            
                             <div class="d-md-flex">
                                 <ul class="list-inline d-flex ms-auto">
                                     <li class="ps-3">
-                                        <h5><i class="fa fa-circle me-1 text-info"></i>last month's deal</h5>
+                                        <h5><i class="fa fa-circle me-1 text-info"></i>J INVESTMENT BANK<h5>
                                     </li>
-                                    <li class="ps-3">
-                                        <h5><i class="fa fa-circle me-1 text-inverse"></i>deals this month</h5>
-                                    </li>
+                                    
                                 </ul>
                             </div>
-                          <!--   <div id="ct-visits" style="height: 405px;">
+                            
+                            <div id="map" style="width000px;height:400px;"></div>
+	
+	
+	  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2a5469364f4e047b9ce872e670e9dadb&libraries=services,clusterer"></script>
+      <script>
+      var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+          mapOption = { 
+              center: new kakao.maps.LatLng(37.477366, 126.862592), // 지도의 중심좌표
+              level: 3 // 지도의 확대 레벨
+          };
+      
+      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+      
+      // 마커가 표시될 위치입니다 
+      var markerPosition  = new kakao.maps.LatLng(37.477366, 126.862592); 
+      
+      // 마커를 생성합니다
+      var marker = new kakao.maps.Marker({
+          position: markerPosition
+      });
+      
+      // 마커가 지도 위에 표시되도록 설정합니다
+      marker.setMap(map);
+      
+      // 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+      // marker.setMap(null);    
+      </script>
+	
+                            
+                            
+                           <!--  <div id="ct-visits" style="height: 405px;">
                                 <div class="chartist-tooltip" style="top: -17px; left: -12px;"><span
                                         class="chartist-tooltip-value">6</span>
                                 </div>
-                            </div> -->
+                            </div>  -->
                         </div>
                     </div>
                 </div>
@@ -178,85 +222,53 @@
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
+                         <h3 class="box-title mb-0">RECENT TRANSACTION</h3> 
                             <div class="d-md-flex mb-3">
-                                <h3 class="box-title mb-0">Recent sales</h3>
-                                <div class="col-md-3 col-sm-4 col-xs-6 ms-auto">
-                                    <select class="form-select shadow-none row border-top">
-                                        <option>March 2021</option>
-                                        <option>April 2021</option>
-                                        <option>May 2021</option>
-                                        <option>June 2021</option>
-                                        <option>July 2021</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table no-wrap">
-                                    <thead>
-                                        <tr>
-                                            <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Name</th>
-                                            <th class="border-top-0">Status</th>
-                                            <th class="border-top-0">Date</th>
-                                            <th class="border-top-0">Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td>EXTENDED</td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td>EXTENDED</td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td>TAX</td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="text-danger">-$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="text-danger">-$14</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td>MEMBER</td>
-                                            <td class="txt-oflo">April 22, 2021</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                       
+                             
+	<div class="d-flex justify-content-center mt-5">
+
+			<div class="container">
+				<div class="row">
+				<div class="col"></div>
+					<div class="">
+				<table  class="table" style="width:100%;">
+			  	<thead>
+					<tr class="table-light">
+						<th width="3%" class="">#</th>
+						<th width="10%" class="">DATE</th>
+						<th width="30%" class="">WITHRAWAL BANK</th>
+						<th width="16%" class="">DEPOSIT BANK</th>
+						<th width="30%" class="">WITHRAWAL ACCOUNT</th>
+						<th width="50%" class="">DEPOSIT ACCOUNT</th>
+						<th width="10%" class="">SENDER </th>
+						<th width="10%" class="">DEPOSITOR</th>
+						<th width="10%" class="">AMOUNT</th>
+						
+					</tr>
+			  </thead>	
+		<tbody class="table-group-divider">
+				<c:forEach items="${ transactionList}" var="transactionList" varStatus="loop">
+					<tr>
+					 	<td class="table-light">${ transactionList['TRANNUM'] }</td>
+						<td class="table-light">${ transactionList['TRANDATE']}</td>
+						<td class="table-light">${ transactionList['WITHRAWALBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITBANKNAME'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['DEPOSITACCOUNTNUM'] }</td>
+						<td class="table-light">${ transactionList['WITHRAWALNAME']}</td>
+						<td class="table-light">${ transactionList['DEPOSITNAME'] }</td>
+						<td class="table-light">${ transactionList['TRANAMOUNT'] }</td>					 
+					</tr>
+				</c:forEach>
+		</tbody>
+		</table>
+					</div>
+				</div>
+			</div>
+			</div>
+       </div>
+                          	
                 <!-- ============================================================== -->
                 <!-- Recent Comments -->
                 <!-- ============================================================== -->

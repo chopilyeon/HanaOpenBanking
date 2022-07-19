@@ -128,13 +128,7 @@
                                 <span class="hide-menu">MEMBER INFO</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
-                                aria-expanded="false">
-                                <i class="fa fa-table" aria-hidden="true"></i>
-                                <span class="hide-menu">RECENT TRANS</span>
-                            </a>
-                        </li>
+                      
                         
                         
                          <li class="sidebar-item">
@@ -149,19 +143,13 @@
                         
                     
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="${pageContext.request.contextPath}/board/list.do"
                                 aria-expanded="false">
                                 <i class="fas fa-eye-dropper" aria-hidden="true"></i>
                                 <span class="hide-menu">Q&A</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="${pageContext.request.contextPath}/map.do"
-                                aria-expanded="false">
-                                <i class="fa fa-columns" aria-hidden="true"></i>
-                                <span class="hide-menu">MAP</span>
-                            </a>
-                        </li> 
+                  
 
       
     					 </c:when>
@@ -173,7 +161,18 @@
                                 <i class=" fas fa-eye-dropper" aria-hidden="true"></i>
                                 <span class="hide-menu">SIGN UP</span>
                             </a>
-                        </li>                      
+                        </li>           
+                        
+                         <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="${pageContext.request.contextPath}/map.do"
+                                aria-expanded="false">
+                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <span class="hide-menu">MAP</span>
+                            </a>
+                        </li> 
+                        
+                        
+                                   
               			</c:otherwise>
          			</c:choose>            
                 

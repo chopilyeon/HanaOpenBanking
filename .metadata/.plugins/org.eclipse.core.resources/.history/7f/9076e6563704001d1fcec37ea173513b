@@ -1,9 +1,0 @@
-package kr.ac.kopo.bank.service;
-
-import kr.ac.kopo.member.dao.MemberDAO;
-
-public class BankService {
-	
-	private BankDAO bankDao;
-
-}
