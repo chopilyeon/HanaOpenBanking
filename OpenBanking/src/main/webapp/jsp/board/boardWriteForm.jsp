@@ -36,6 +36,35 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
+
+
+<script>
+	$(document).ready(function(){
+		$('#listBtn').click(function(){
+			location.href="${pageContext.request.contextPath}/board/list.do"
+		})
+				
+	})
+
+	 function checkForm(){
+		
+		let f = document.writeForm
+		if(f.title.value==''){
+			document.getElementById("trigger").click();
+			f.title.focus() 
+			return false
+		}
+
+		if(f.content.value==''){
+			document.getElementById("trigger").click();
+			f.content.focus()
+			return false
+		}
+		return true;
+	}	
+</script>		
+
+
 </head>
 <body>
 
@@ -44,7 +73,86 @@
 	
 	<section>
 	
+		<div align="center" class="">
+		<hr>
+		<h2 class="mt-5">BOARD</h2>
+		<hr>
+		<br>
+		
+		
+		<div class="d-flex justify-content-center">
 	
+			<div class="container">
+				<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-11">
+	
+	
+	
+	<form action="${pageContext.request.contextPath}/board/writeProcess.do" method="post" name="writeForm" onsubmit="return checkForm()" class="mt-5">
+
+		<input type="hidden" name ="id" value="${userVO.id}" >
+		<table border="1" style="width:80%" class="table">
+			<tr>
+
+				<th class="">TITLE</th>	
+				<td><input type="text" name="title" class="form-control input-sm"></td>  
+
+				
+			</tr>
+			<tr>
+			
+				<th width ="25%" class="ml-5">WRITER</th>
+				<td>${userVO.id }</td> 
+			
+			</tr>
+			<tr>
+				<th width ="25%" class="ml-5">CONTENT</th>
+				<td>
+					<textarea rows="5" cols="80" name="content" class="form-control"></textarea>
+				</td>		
+			</tr>
+		</table>
+		<br>
+		<input type="submit" value="WRITE">&nbsp;
+		
+	<form>
+	
+	<button id="listBtn">LIST</button>
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	
+		<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" id="trigger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+ 		 Launch demo modal
+	</button>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  		<div class="modal-dialog">
+    		<div class="modal-content py-5">
+    			 <div class="modal-body">
+     	 			 <p class="fs-6 text-center">PLEASE WRITE TITLE AND CONTENT</p>
+     	  		
+     	 			 <p class="fs-6 text-center">THANK YOU   ${userVO.id}! <p>
+   
+     
+     	   
+     			</div>
+   			 </div>
+  		</div>
+	</div>
+	
+	
+	
+	
+	
+	
+</section>
 	
 	
 	
@@ -73,7 +181,30 @@
 
 	<jsp:include page="/jsp/include/footer.jsp" />
 	
+	 	
+<script>
+
 	
+	
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+ 	
+ 	document.getElementById("trigger").style.display = 'none';
+	document.getElementById("click").style.display = 'none';
+ 	
+ 	
+ 	const fail = document.getElementById("fail");
+ 	
+ 	fail.addEventListener("click",()=>{
+ 		document.getElementById("click").click();
+ 	});
+ 	
+ 	
+ 	
+ });
+
+</script>
 	
 	
 	

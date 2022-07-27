@@ -1,26 +1,44 @@
 package kr.ac.kopo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.ac.kopo.board.service.BoardService;
+import kr.ac.kopo.board.vo.BoardVO;
 
 public class BoardDetailController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
+		request.setCharacterEncoding("utf-8");
 		BoardService boardService = new BoardService();
 
-		String first_boardNo = request.getParameter("boardNo");
-		int boardNo = Integer.parseInt(first_boardNo);
-		boardService 
+		int boardNo =Integer.parseInt(request.getParameter("boardNo"));
+		int subNum =Integer.parseInt(request.getParameter("subNum"));
+		System.out.println("subNum :"+subNum);
+		
+		BoardVO boardVO = new BoardVO();
+		boardVO.setBoardNum(boardNo);
+		boardVO.setSubNum(subNum);
+		System.out.println(boardVO);
+		
+		boardService.plusView(boardVO);
+		
+		
+		List<BoardVO> boardDetailList = boardService.selectBoardByNo(boardNo);
 		
 		
 		
 		
+		request.setAttribute("boardDetailList",boardDetailList);
 		
 		
+		
+		
+
 		
 		return "/jsp/board/detail.jsp";
 	}

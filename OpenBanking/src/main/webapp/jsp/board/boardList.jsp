@@ -37,7 +37,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
 <script>
-	function checkLogin(boardNum){	
+	function checkLogin(boardNum,subNum){	
 		<c:choose>
 		<c:when test="${empty userVO}">
 			if(confirm('로그인 후 사용이 가능합니다\n 로그인 페이지로 이동할까요?')){
@@ -45,10 +45,10 @@
 			}
 				
 				
-		
+			
 		</c:when>
 		<c:otherwise>
-			location.href='${pageContext.request.contextPath}/board/detail.do?boardNo='+ boardNum
+			location.href='${pageContext.request.contextPath}/board/detail.do?boardNo='+ boardNum +'&subNum='+subNum
 		</c:otherwise>
 	
 		</c:choose>  
@@ -80,17 +80,17 @@
 	
 			<div class="container">
 				<div class="row">
-				<div class="col-md-1"></div>
-					<div class="col-md-11">
+				<div class="col-md-3"></div>
+					<div class="col-md-9">
 	
-		<table style="width:60%" class="table btn float-left">
+		<table style="width:80%" class="table float-left">
 			  	<thead>
 					<tr class="table-light p-5">
-						<th width="16%" class="p-5">번호</th>
-						<th width="16%" class="p-5">제목</th>
-						<th width="16%" class="p-5">작성자</th>
-						<th width="40%" class="p-5">등록일</th>
-						<th width="40%" class="p-5">조회수</th>
+						<th width="16%" class="">#</th>
+						<th width="50%" class="">TITLE</th>
+						<th width="16%" class="">WRITER</th>
+						<th width="40%" class="">DATE</th>
+						<th width="50%" class="">VIEW</th>
 					</tr>
 			  </thead>	
 		<tbody class="table-group-divider">
@@ -98,12 +98,18 @@
 					<tr>
 						<td class="table-light">${ boardList.boardNum }</td>
 						<td class="table-light">
-						<a href="javascript:checkLogin(${board.boardNum })"> <c:out value="${board.title }" />
+						<c:if test="${boardList.subNum ge 1 }">
+							<c:forEach var="i" begin="0" end="${boardList.subNum}">
+								<span> &nbsp;</span>
+							</c:forEach>
+						</c:if>
+						<a href="javascript:checkLogin(${boardList.boardNum },${boardList.subNum })">
+						<c:out value="${boardList.title }" />
 						</a>
 						</td>
-						<td class="table-light">${ board.id }</td>
-						<td class="table-light">${ board.regDate }</td>
-						<td class="table-light">${ board.viewCnt }</td>
+						<td class="table-light">${ boardList.id }</td>
+						<td class="table-light">${ boardList.regDate }</td>
+						<td class="table-light">${ boardList.viewCnt }</td>
 					</tr>
 				</c:forEach>
 		</tbody>
@@ -111,12 +117,14 @@
 				
 	
 		</table>
+				
+		
+		 <c:if test="${ userVO.type ne 'A' }"> 
+			<button type="button" class="btn btn-outline-dark" onclick="location.href='${pageContext.request.contextPath}/board/writeForm.do'">WRITE QUESTION</button>
+		 </c:if> 
 	</div>
 		
 		
-		<c:if test="${userVO.type eq 'A' }">
-				<button id="addBtn"><a href="${pageContext.request.contextPath}/board/answer.do">답변하기</a></button>
-		</c:if>
 		
 				</div>
 	

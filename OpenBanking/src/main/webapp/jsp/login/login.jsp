@@ -156,7 +156,7 @@ function kakaoLogout() {
       <i class="fab fa-facebook-f"></i>
     </button>
 
-    <button type="button" class="btn btn-link btn-floating mx-1">
+    <button type="button" class="btn btn-link btn-floating mx-1" onclick="kakaoLogout();">
       <img src="/OpenBanking/resources/images/naver.png" alt="user-img" class="img-circle" width="30">
     </button>
 

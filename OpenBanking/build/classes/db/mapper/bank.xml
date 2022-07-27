@@ -43,18 +43,18 @@
 	
 	
 	
-<!-- 	<select id="checkoutJHBANK" parameterType="bankVO" resultMap="bankMap">
-		select id, account_number, account_password, A.bank_code as bank_code, to_char(bank_reg_date,'YYYY-MM-DD HH:MI:SS') as bankRegDate, balance, bank_alias, transfer_limit, B.bank_name as bankName 
-		 	from account A@JH_BANK, bank_code B 
-		 	where A.bank_code=B.bank_code and A.id=#{id}
+  <select id="checkoutJHBank" parameterType="bankVO" resultMap="bankMap">
+	select phone_number, account_number, account_password, A.bank_code as bank_code,  bank_reg_date, balance, bank_alias, transfer_limit, B.bank_name as bankName 
+		 	from account@JH_BANK A, bank_code B 
+		 	where A.bank_code=B.bank_code and A.phone_number=#{phoneNumber}
 	</select>
 	
-	<select id="checkoutJBBANK" parameterType="bankVO" resultMap="bankMap">
-		select id, account_number, account_password, A.bank_code as bank_code, to_char(bank_reg_date,'YYYY-MM-DD HH:MI:SS') as bankRegDate, balance, bank_alias, transfer_limit, B.bank_name as bankName 
-		 	from account A@BERRY_BANK, bank_code B 
-		 	where A.bank_code=B.bank_code and A.id=#{id}
+	<select id="checkoutJBBank" parameterType="bankVO" resultMap="bankMap">
+	select phone_number, account_number, account_password, A.bank_code as bank_code,  bank_reg_date, balance, bank_alias, transfer_limit, B.bank_name as bankName 
+		 	from account@BERRY_BANK A, bank_code B 
+		 	where A.bank_code=B.bank_code and A.phone_number=#{phoneNumber}
 	</select>
-	 -->
+
 	
 	
 	<select id="checkAccountBANK" parameterType="string" resultMap="bankMap">
@@ -70,15 +70,17 @@
 	</select>
 	
 	
-	<!-- <select id="checkAccountJBBANK" parameterType="string" resultType="string">
-		select bank_code from account@BERRY_BANK
+   <select id="checkAccountJBBANK" parameterType="string" resultMap="bankMap">
+		select PHONE_NUMBER,ACCOUNT_NUMBER,ACCOUNT_PASSWORD,BANK_CODE,BALANCE,BANK_ALIAS,TRANSFER_LIMIT 
+		from account@BERRY_BANK
 		where account_number = #{anything}  
 	</select>
 	
-	<select id="checkAccountJHBANK" parameterType="string" resultType="string">
-		select bank_code from account A@JH_BANK
+	<select id="checkAccountJHBANK" parameterType="string" resultMap="bankMap">
+		select PHONE_NUMBER,ACCOUNT_NUMBER,ACCOUNT_PASSWORD,BANK_CODE,BALANCE,BANK_ALIAS,TRANSFER_LIMIT 
+		from account@JH_BANK
 		where account_number = #{anything}  
-	</select> -->
+	</select> 
 	
 	
 	
@@ -93,10 +95,14 @@
 	
 	<update id="transferToOtherAccountAtWithrawal" parameterType="map">
 	 BEGIN
-   		 UPDATE ACCOUNT@${depositBankName} SET BALANCE=BALANCE - to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{withrawalAccountNumber};
+   		 UPDATE ACCOUNT@${withrawalBankName} SET BALANCE=BALANCE - to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{withrawalAccountNumber};
     	 UPDATE ACCOUNT SET BALANCE=BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
     	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
     	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${withrawalBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${withrawalBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 
+    	 
     	 COMMIT;
 	 EXCEPTION
      	WHEN OTHERS THEN 
@@ -113,6 +119,12 @@
     	 UPDATE ACCOUNT@${depositBankName} SET BALANCE=BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
     	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
     	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${withrawalBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${withrawalBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${depositBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${depositBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	
+    	 
     	 COMMIT;
 	 EXCEPTION
     	 WHEN OTHERS THEN 
@@ -128,6 +140,8 @@
     	 UPDATE ACCOUNT@${depositBankName} SET BALANCE = BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
     	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
     	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${depositBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${depositBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});  	
     	 COMMIT;
 	 EXCEPTION
      	WHEN OTHERS THEN 
@@ -156,4 +170,4 @@
 	
 	
 	
-</mapper>		
+</mapper>	

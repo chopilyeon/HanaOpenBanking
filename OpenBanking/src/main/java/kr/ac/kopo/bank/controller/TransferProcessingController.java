@@ -1,5 +1,7 @@
 package kr.ac.kopo.bank.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +52,22 @@ public class TransferProcessingController implements Controller {
 		withrawalBankCode=bankService.checkAccountBKBANK(withrawalAccountNumber).getBankCode();
 	};
 	
+
+	if(bankService.checkAccountJHBANK(withrawalAccountNumber)!=null) {
+		withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
+	};
+	
+	if(bankService.checkAccountJBBANK(withrawalAccountNumber)!=null) {
+		withrawalBankCode=bankService.checkAccountBKBANK(withrawalAccountNumber).getBankCode();
+	};
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	if(bankService.checkAccountBANK(depositAccountNumber)!=null) {
 		depositBankCode=bankService.checkAccountBANK(depositAccountNumber).getBankCode();		
@@ -58,6 +76,18 @@ public class TransferProcessingController implements Controller {
 	if(bankService.checkAccountBKBANK(depositAccountNumber)!=null) {
 		depositBankCode=bankService.checkAccountBKBANK(depositAccountNumber).getBankCode();		
 	};
+	
+	if(bankService.checkAccountJBBANK(depositAccountNumber)!=null) {
+		depositBankCode=bankService.checkAccountBKBANK(depositAccountNumber).getBankCode();		
+	};
+	
+	if(bankService.checkAccountJHBANK(depositAccountNumber)!=null) {
+		depositBankCode=bankService.checkAccountBKBANK(depositAccountNumber).getBankCode();		
+	};
+	
+	
+	
+	
 	
 	
 	System.out.println("controller bankcode depositBankCode : " + depositBankCode);
@@ -103,13 +133,28 @@ public class TransferProcessingController implements Controller {
 		bankService.transferToOtherAccountAllDifferent(map);
 	}
 	 
-	 
-	 
+	Date date = new Date();
+	SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd");
+
+	String tranDate = formatter.format(date).toString();
+	
+	System.out.println(formatter.format(date));
+
+	request.setAttribute("withrawalName", withrawalName);
+	
+	request.setAttribute("depositName", depositName);
+	
+	request.setAttribute("tranDate",tranDate);
+
+	
+	
+	request.setAttribute("tranAmount", tranAmount);
+	
 	 
 	 
 		
 		
-	return "redirect:/jsp/welcome/welcomeTransfer.jsp";
+	return "/jsp/welcome/welcomeTransfer.jsp";
 	}
 
 }

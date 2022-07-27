@@ -44,6 +44,8 @@ public class MakeAccountProcessingController implements Controller {
 		
 		
 		StringBuilder stb = new StringBuilder();
+		stb.append("0305");
+		stb.append("-");
 		stb.append(accountNumber1);
 		stb.append("-");
 		stb.append(accountNumber2);

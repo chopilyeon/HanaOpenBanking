@@ -23,7 +23,7 @@ public class BoardListController implements Controller {
 		request.setAttribute("boardList", boardList);
 		
 		
-		return "jsp/board/boarList.jsp";
+		return "/jsp/board/boardList.jsp";
 	}
 
 }

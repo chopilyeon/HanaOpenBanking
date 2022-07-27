@@ -1,8 +1,0 @@
-package kr.ac.kopo.bankCode.vo;
-
-public class BankCodeVO {
-	String bankCode;
-	String bankName;
-	
-
-}

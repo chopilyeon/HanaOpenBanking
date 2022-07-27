@@ -1,0 +1,44 @@
+package jsonTest;
+
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import kr.ac.kopo.bank.service.BankService;
+import kr.ac.kopo.bank.vo.BankVO;
+import kr.ac.kopo.controller.Controller;
+
+public class GsonTestController implements Controller {
+
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		String phoneNumber = request.getParameter("phoneNumber");
+		
+		BankVO userVO = new BankVO(phoneNumber);
+		
+		BankService bankService = new BankService();
+		
+		List<BankVO> bankList= bankService.checkAccount(userVO);
+		
+		
+		 Gson gson = new Gson();         // Json key, value 추가       
+	     String jsonStr = gson.toJson(bankList);
+	     
+	     
+	     PrintWriter out=response.getWriter(); 
+	     
+	     System.out.println(jsonStr);
+	     out.println(jsonStr);
+	    
+
+		 return null;
+		
+	}
+
+}

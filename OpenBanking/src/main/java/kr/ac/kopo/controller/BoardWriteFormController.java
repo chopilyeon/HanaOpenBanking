@@ -7,8 +7,13 @@ public class BoardWriteFormController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+
+		
+		
+		
+		return "/jsp/board/boardWriteForm.jsp";
+		
 	}
 
 }

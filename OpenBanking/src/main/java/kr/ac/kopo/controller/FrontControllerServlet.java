@@ -26,7 +26,17 @@ public class FrontControllerServlet extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+		
+		
+		
+		
+		
+		
+		
 		System.out.println("요청처리 ...");
 
 		String uri = request.getRequestURI();

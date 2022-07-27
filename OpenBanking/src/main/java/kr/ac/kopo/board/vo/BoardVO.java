@@ -6,37 +6,16 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String regDate;
-	private int groupDepthNumber;
-	public BoardVO(String id, int boardNum, String title, String content, String regDate, int groupDepthNumber,
-			int groupNumber, String type, int viewCnt) {
-		super();
-		this.id = id;
-		this.boardNum = boardNum;
-		this.title = title;
-		this.content = content;
-		this.regDate = regDate;
-		this.groupDepthNumber = groupDepthNumber;
-		this.groupNumber = groupNumber;
-		this.type = type;
-		this.viewCnt = viewCnt;
-	}
-	private int groupNumber;
-	private String type;
+	private int subNum;
 	private int viewCnt;
-	public BoardVO(String id, int boardNum, String title, String content, String regDate, int groupDepthNumber,
-			int groupNumber, String type) {
-		super();
-		this.id = id;
-		this.boardNum = boardNum;
-		this.title = title;
-		this.content = content;
-		this.regDate = regDate;
-		this.groupDepthNumber = groupDepthNumber;
-		this.groupNumber = groupNumber;
-		this.type = type;
-	}
 	public String getId() {
 		return id;
+	}
+	public BoardVO(String id, String title, String content) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.content = content;
 	}
 	public void setId(String id) {
 		this.id = id;
@@ -65,29 +44,11 @@ public class BoardVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	public int getGroupDepthNumber() {
-		return groupDepthNumber;
+	public int getSubNum() {
+		return subNum;
 	}
-	public void setGroupDepthNumber(int groupDepthNumber) {
-		this.groupDepthNumber = groupDepthNumber;
-	}
-	public int getGroupNumber() {
-		return groupNumber;
-	}
-	public void setGroupNumber(int groupNumber) {
-		this.groupNumber = groupNumber;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	@Override
-	public String toString() {
-		return "BoardVO [id=" + id + ", boardNum=" + boardNum + ", title=" + title + ", content=" + content
-				+ ", regDate=" + regDate + ", groupDepthNumber=" + groupDepthNumber + ", groupNumber=" + groupNumber
-				+ ", type=" + type + ", viewCnt=" + viewCnt + "]";
+	public void setSubNum(int subNum) {
+		this.subNum = subNum;
 	}
 	public int getViewCnt() {
 		return viewCnt;
@@ -95,6 +56,42 @@ public class BoardVO {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+	public BoardVO(String id, int boardNum, String title, String content, String regDate, int subNum, int viewCnt) {
+		super();
+		this.id = id;
+		this.boardNum = boardNum;
+		this.title = title;
+		this.content = content;
+		this.regDate = regDate;
+		this.subNum = subNum;
+		this.viewCnt = viewCnt;
+	}
+	public BoardVO(String id, int boardNum, String title, String content, String regDate, int subNum) {
+		super();
+		this.id = id;
+		this.boardNum = boardNum;
+		this.title = title;
+		this.content = content;
+		this.regDate = regDate;
+		this.subNum = subNum;
+	}
+	public BoardVO(String id, int boardNum, String title, String content, String regDate) {
+		super();
+		this.id = id;
+		this.boardNum = boardNum;
+		this.title = title;
+		this.content = content;
+		this.regDate = regDate;
+	}
+	@Override
+	public String toString() {
+		return "BoardVO [id=" + id + ", boardNum=" + boardNum + ", title=" + title + ", content=" + content
+				+ ", regDate=" + regDate + ", subNum=" + subNum + ", viewCnt=" + viewCnt + "]";
+	}
+	public BoardVO() {
+		super();
+	}
+	
 
 	
 	

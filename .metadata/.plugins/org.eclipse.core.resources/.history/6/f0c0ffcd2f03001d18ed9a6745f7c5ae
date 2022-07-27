@@ -1,7 +1,0 @@
-package kr.ac.kopo;
-
-public class MyBatisMain {
-	
-	resultMap="boardMap"
-
-}

@@ -1,5 +1,8 @@
 package kr.ac.kopo.bank.controller;
 
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,10 +46,28 @@ public class TransferToAnotherProcessingController implements Controller {
 		if(bankService.checkAccountBKBANK(withrawalAccountNumber)!=null) {
 			withrawalBankCode=bankService.checkAccountBKBANK(withrawalAccountNumber).getBankCode();		
 		};
+
+		if(bankService.checkAccountJBBANK(withrawalAccountNumber)!=null) {
+			withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
+		};
+
+		if(bankService.checkAccountJHBANK(withrawalAccountNumber)!=null) {
+			withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
+		};
+		
+		
+		
+		
+		
+		
 		
 	
-		
-		
+		Date date = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd");
+
+		String tranDate = formatter.format(date).toString();
+		System.out.println(formatter.format(date));
+
 		
 		
 		if(depositBankName.equals("BK_BANK")) {
@@ -95,11 +116,14 @@ public class TransferToAnotherProcessingController implements Controller {
 		}
 			 
 		
+		request.setAttribute("withrawalName", withrawalName);	
+		request.setAttribute("depositName", depositName);
+		request.setAttribute("tranDate",tranDate);
+		request.setAttribute("tranAmount", tranAmount);
 		
 		
 		
-		
-		return "redirect:/jsp/welcome/welcomeTransfer.jsp";
+		return "/jsp/welcome/welcomeTransfer.jsp";
 	}
 
 }

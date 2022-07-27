@@ -19,7 +19,38 @@ public class BoardService {
 	}
 	
 	
+	public void insertBoard(BoardVO boardVO) {
+		boardDao = new BoardDAO();
+		boardDao.insertBoard(boardVO);
+		
+	}
 	
+	
+	public List<BoardVO> selectBoardByNo(int boardNum) {
+		boardDao = new BoardDAO();
+		
+		List<BoardVO> boardList= boardDao.selectBoardByNo(boardNum);
+		
+		return boardList;
+	}
+	
+	public void insertSubBoard(BoardVO boardVO) {
+		boardDao = new BoardDAO();
+		boardDao.insertSubBoard(boardVO);
+		
+	}
+	
+	public int selectMaxSub(int boardNum) {
+		boardDao = new BoardDAO();
+		int maxSubNum= boardDao.selectMaxSub(boardNum);
+		return maxSubNum;
+	}
+	
+	public void plusView(BoardVO boardVO) {
+		boardDao = new BoardDAO();
+		boardDao.plusView(boardVO);
+		
+	}
 	
 	
 }

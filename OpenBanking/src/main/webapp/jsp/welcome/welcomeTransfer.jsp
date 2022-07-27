@@ -18,7 +18,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/OpenBanking/resources/images/favicon.png">
     <!-- Custom CSS -->
     <link href="/OpenBanking/resources/css/chartist.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/OpenBanking/resources/css/chartist-plugin-tooltip.css">
+    <link rel="stylesheet" href="/OpenBanking/resources/css/chartist-plugin-tooltip.css"> 
     <!-- Custom CSS -->
     <link href="/OpenBanking/resources/css/style.min.css" rel="stylesheet">
     <link href="/OpenBanking/resources/css/onlyForMe.css" rel="stylesheet">
@@ -29,6 +29,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
+
+
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
 <body>
@@ -59,11 +62,15 @@
   		<div class="modal-dialog">
     		<div class="modal-content py-5">
     			 <div class="modal-body">
-     	 			 <p class="fs-6 text-center">TRANSFER COMPLETED</p>
+     	 			 <p class="fs-3 text-center">FROM ${withrawalName} TO ${depositName} TRANSFER COMPLETED </p>
+     	 			 <p class="fs-3 text-center"> ${tranDate} </p> 
      	  		
      	 			 <p class="fs-6 text-center">THANK YOU ${userVO.id}! <p>
    
-     
+     				<div class="d-flex justify-content-center">
+     					 <img src="/OpenBanking/resources/images/kakao.png" alt="user-img" class="img-circle" width="30">
+     	   				<button id="kakaotalk-sharing-btn">SEND TRANSFER RESULT</button>
+     	   			</div>
      	   
      			</div>
    			 </div>
@@ -112,20 +119,65 @@
 document.addEventListener("DOMContentLoaded",()=>{
  	document.getElementById("trigger").click();
  	document.getElementById("trigger").style.display = 'none';
-	document.getElementById("click").style.display = 'none';
+	
  	
  	
- 	const fail = document.getElementById("fail");
+/*  	const fail = document.getElementById("fail"); */
  	
- 	fail.addEventListener("click",()=>{
+ 	/* fail.addEventListener("click",()=>{
  		document.getElementById("click").click();
- 	});
+ 	}); */
  	
  	
  	
  });
 
 </script>
+
+
+<script>
+const withrawalName = '${withrawalName}';
+const tranAmount ='${tranAmount}';
+const tranDate = '${tranDate}';
+const depositName = '${depositName}';
+console.log(withrawalName,tranAmount,tranDate,depositName); 
+
+Kakao.init('2a5469364f4e047b9ce872e670e9dadb'); 
+ // 이건 각자 발급받은 키 사용하셔야 합니다!!
+Kakao.Share.createDefaultButton({
+    container: '#kakaotalk-sharing-btn',
+    objectType: 'feed',
+    content: {
+      title: '이체 알림',
+      description: withrawalName + '님이 ' + tranDate + '에 ' + depositName + '님에게 ' +  tranAmount+ '원을 이체하였습니다.' ,
+      imageUrl:
+        'https://product-image.juniqe-production.juniqe.com/media/catalog/product/seo-cache/x800/265/130/265-130-101P/J-Mottos-by-Sinan-Saydik-Poster.jpg',
+      link: {
+        mobileWebUrl: 'https://developers.kakao.com',
+        androidExecutionParams: 'test',
+      },
+    },
+    itemContent: {
+      profileText: 'J_INVESTMENT_BANK',
+      profileImageUrl: 'https://product-image.juniqe-production.juniqe.com/media/catalog/product/seo-cache/x800/265/130/265-130-101P/J-Mottos-by-Sinan-Saydik-Poster.jpg',
+    },
+    social: {
+      likeCount: 10,
+      commentCount: 20,
+      sharedCount: 30,
+    },
+    buttons: [
+      {
+        title: '자세히 보기',
+        link: {
+          mobileWebUrl: 'https://developers.kakao.com',
+        }
+      }
+    ]
+  });
+</script>
+
+
 
 
 

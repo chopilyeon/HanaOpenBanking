@@ -1,9 +1,0 @@
-package kr.ac.kopo.transaction.Service;
-
-import kr.ac.kopo.transaction.dao.TransactionDAO;
-
-public class TransactionService {
-	private TransactionDAO transactionDao;
-	
-	
-}

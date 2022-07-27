@@ -33,9 +33,9 @@
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span class="logo-text">
+                        <span class="">
                             <!-- dark Logo text -->
-                            <img src="/OpenBanking/resources/images/logo-text.png" alt="homepage" />
+     
                         </span>
                     </a>
                     <!-- ============================================================== -->

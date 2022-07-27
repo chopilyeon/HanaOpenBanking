@@ -1,0 +1,41 @@
+package jsonTest;
+
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import kr.ac.kopo.controller.Controller;
+
+public class GsonTestController implements Controller {
+
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String phoneNumber = request.getParameter("phoneNumber);
+		
+		
+		
+		Gson gson = new Gson();         // Json key, value 추가       
+	     JsonObject jsonObject = new JsonObject(); 
+	     jsonObject.addProperty("name", "anna");  
+	     jsonObject.addProperty("id", 1);         // JsonObject를 Json 문자열로 변환      
+	     String jsonStr = gson.toJson(jsonObject);         // 생성된 Json 문자열 출력        
+	     System.out.println(jsonStr); // {"name":"anna","id":1}  
+	     
+	     
+	     
+	     PrintWriter out=response.getWriter(); 
+	     out.println(jsonStr);
+	     
+	     request.setAttribute("jsonStr",jsonStr);
+	     
+
+		return null;
+		
+	}
+
+}

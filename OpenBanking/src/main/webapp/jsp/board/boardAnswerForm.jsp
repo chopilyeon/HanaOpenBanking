@@ -44,9 +44,125 @@
 	
 	<section>
 	
+	<div class="d-flex justify-content-center mt-5">
+
+			<div class="container">
+				<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-11">	
 	
 	
 	
+		<div align="center">
+		<hr>
+		<h1>개별 게시글 조회</h1>
+		<hr>
+		<br>
+		
+		<table border="1" style="width:80%">
+			<tr>
+				<th width="25%">번호</th>
+				<td>${boardVO.boardNum}</td>
+			</tr>
+			<tr>
+				<th width="25%">제목</th>
+				<td>${boardVO.title}</td>
+				
+			</tr>
+			<tr>
+				<th width="25%">작성자</th>
+				<td>${boardVO.id}</td>
+				
+			</tr>
+			<tr>
+				<th width="25%">내용</th>
+				<td>${boardVO.content}</td>
+				
+			</tr>
+			<tr>
+				<th width="25%">조회수</th>
+				<td>${boardVO.viewCnt}</td>
+				
+			</tr>
+		
+			<tr>
+				<th width="25%">등록일</th>
+				<td>${boardVO.regDate}</td>
+				
+			</tr>
+			
+			
+			
+
+		</table>
+		
+		</div>
+		</div>
+		</div>
+		</div>
+		
+		<br>
+		
+	</div>
+	
+<div class="d-flex justify-content-center mt-5">
+
+			<div class="container">
+				<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-11">		
+	
+	
+<div class="d-flex justify-content-center mt-5">
+		<button onclick="doAction('U')">수  정</button>&nbsp;&nbsp;
+		<button onclick="doAction('D')">삭  제</button>&nbsp;&nbsp;
+		<button onclick="doAction('L')">목  록</button>&nbsp;&nbsp;
+</div>
+	
+	
+</div>
+</div>
+</div>
+</div>
+	
+	
+	
+    <div align="center">
+		<hr>
+		<h2>새글 등록폼</h2>
+		</hr>
+		<br>
+	
+	
+	<form action="${pageContext.request.contextPath}/board/writeAnswerProcess.do" method="post" name="writeForm" onsubmit="return checkForm()">
+
+		<input type="hidden" name ="id" value="${userVO.id}">
+		<table border="1" style="width:80%">
+			<tr>
+
+				<th width="25%">제목</th>	
+				<td><input type="text" name="title" size=80></td>  
+
+				
+			</tr>
+			<tr>
+			
+				<th width ="25%">작성자</th>
+				<td>${userVO.id }</td> 
+			
+			</tr>
+			<tr>
+				<th width ="25%">내용</th>
+				<td>
+					<textarea rows="5" cols="80" name="content"></textarea>
+				</td>		
+			</tr>
+		</table>
+		<br>
+		<input type="submit" value="새글등록">&nbsp;
+		<button id="listBtn">목록</button>
+	<form>
+	</div>
 	
 	
 	

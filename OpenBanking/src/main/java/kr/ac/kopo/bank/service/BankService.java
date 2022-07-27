@@ -35,27 +35,32 @@ public class BankService {
 		return userVO;
 	}
 	
-
-	public BankVO checkAccountBKBANK(String AccountNumber) {
-		bankDao=new BankDAO();
-		BankVO userVO = bankDao.checkAccountBKBANK(AccountNumber);
-		
-		return userVO;
-	}
 	
-	
-	/*
-	 * public String checkAccountJBBANK(String accountNumber) { String
-	 * bankCode=bankDao.checkAccountBKBANK(accountNumber);
-	 * 
-	 * return bankCode; }
-	 * 
-	 * 
-	 * public String checkAccountJHBANK(String accountNumber) { String
-	 * bankCode=bankDao.checkAccountBKBANK(accountNumber);
-	 * 
-	 * return bankCode; }
-	 */
+	 public BankVO checkAccountBKBANK(String accountNumber) {
+		 bankDao = new BankDAO(); 
+		 BankVO userVO = bankDao.checkAccountBKBANK(accountNumber);
+	  
+		 return userVO; 
+	  }
+	  
+	  
+	  
+	  public BankVO checkAccountJBBANK(String accountNumber) {
+		  bankDao=new BankDAO(); 
+		  BankVO userVO=bankDao.checkAccountJBBANK(accountNumber);
+	  
+		  return userVO;
+	  }
+	 
+	 
+	  public BankVO checkAccountJHBANK(String accountNumber) {
+		  bankDao=new BankDAO();
+		  BankVO userVO=bankDao.checkAccountJHBANK(accountNumber);
+	  
+		  return userVO;
+	  }
+	 
+	 
 
 	
 	public BankVO checkBankName(String bankCode) {

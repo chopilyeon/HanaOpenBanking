@@ -25,9 +25,16 @@ public class BoardDAO {
 		System.out.println("삽입 완료");
 	}
 
+	public void insertSubBoard(BoardVO boardVO) {
+		
+		session.insert("dao.BoardDAO.insertSubBoard",boardVO);
+		session.commit();
+	}
+	
+	
+	
 	public List<BoardVO> selectAllBoard() {
 		List<BoardVO> boardList = session.selectList("dao.BoardDAO.selectAllBoard");
-		
 		
 		for(BoardVO board:boardList) {
 			System.out.println(board);
@@ -35,6 +42,28 @@ public class BoardDAO {
 		
 		return boardList;
 	}	
+	
+	public List<BoardVO> selectBoardByNo(int boardNum) {
+		List<BoardVO> boardList= session.selectList("dao.BoardDAO.selectBoardByNo",boardNum);
+		
+		return boardList;
+		
+	}
+	public int selectMaxSub(int boardNum) {
+		int maxSubNum = session.selectOne("dao.BoardDAO.selectMaxSub",boardNum);
+		
+		return maxSubNum;
+	}
+	
+	public void plusView(BoardVO boardVO) {
+		session.update("dao.BoardDAO.plusView",boardVO);
+		session.commit();
+		
+		
+	}
+	
+	
+	
 	
 
 }
