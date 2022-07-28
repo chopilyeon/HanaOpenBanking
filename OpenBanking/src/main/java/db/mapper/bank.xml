@@ -55,6 +55,15 @@
 		 	where A.bank_code=B.bank_code and A.phone_number=#{phoneNumber}
 	</select>
 
+	<select id="checkoutSKBank" parameterType="bankVO" resultMap="bankMap">
+	select C.phone AS PHONE_NUMBER, A.ACCOUNT_NO AS account_number, A.ACCOUNT_PW AS account_password, A.bank_code as bank_code, SYSDATE AS bank_reg_date, A.BALANCE AS balance, A.ACCOUNT_ALIAS AS bank_alias,50000 AS transfer_limit, B.bank_name as bankName 
+		 	from BANK_ACCOUNT@LINK_ZZONG A, bank_code B, BANK_MEMBER@LINK_ZZONG C 
+		 	where A.bank_code=B.bank_code AND A.ID=C.ID AND C.phone=#{phoneNumber}
+            
+	</select>
+	
+	
+	
 	
 	
 	<select id="checkAccountBANK" parameterType="string" resultMap="bankMap">
@@ -82,6 +91,16 @@
 		where account_number = #{anything}  
 	</select> 
 	
+	<select id="checkAccountSKBANK" parameterType="string" resultMap="bankMap">
+		select A.PHONE AS PHONE_NUMBER, B.ACCOUNT_NO AS ACCOUNT_NUMBER, B.ACCOUNT_PW AS ACCOUNT_PASSWORD, B.bank_code as bank_code, SYSDATE AS REG_DATE,B.balance AS BALANCE, B.ACCOUNT_ALIAS AS BANK_ALIAS,
+        50000 as transfer_limit, C.bank_name as bankName 
+        from BANK_MEMBER@LINK_ZZONG A, BANK_ACCOUNT@LINK_ZZONG B, BANK_CODE C
+		where A.ID=B.ID and B.ACCOUNT_NO=#{anything} AND C.BANK_CODE = B.BANK_CODE    
+            
+	</select> 
+	
+	
+	
 	
 	
 	<select id="checkBankName" parameterType="string" resultMap="bankMap">
@@ -97,10 +116,10 @@
 	 BEGIN
    		 UPDATE ACCOUNT@${withrawalBankName} SET BALANCE=BALANCE - to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{withrawalAccountNumber};
     	 UPDATE ACCOUNT SET BALANCE=BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
-    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
-    	 INSERT INTO TRANSACTION_HISTORY@${withrawalBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${withrawalBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${withrawalBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${withrawalBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
     	 
     	 
     	 COMMIT;
@@ -117,12 +136,12 @@
 	 BEGIN
    		 UPDATE ACCOUNT@${withrawalBankName} SET BALANCE = BALANCE - to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{withrawalAccountNumber};
     	 UPDATE ACCOUNT@${depositBankName} SET BALANCE=BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
-    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
-    	 INSERT INTO TRANSACTION_HISTORY@${withrawalBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${withrawalBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
-    	 INSERT INTO TRANSACTION_HISTORY@${depositBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${depositBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${withrawalBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${withrawalBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${depositBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${depositBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
     	
     	 
     	 COMMIT;
@@ -138,10 +157,10 @@
 	 BEGIN
    		 UPDATE ACCOUNT SET BALANCE=BALANCE - to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{withrawalAccountNumber};
     	 UPDATE ACCOUNT@${depositBankName} SET BALANCE = BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
-    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
-    	 INSERT INTO TRANSACTION_HISTORY@${depositBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${depositBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});  	
+    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY@${depositBankName}(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL@${depositBankName},#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});  	
     	 COMMIT;
 	 EXCEPTION
      	WHEN OTHERS THEN 
@@ -153,8 +172,8 @@
 	 BEGIN
    		 UPDATE ACCOUNT SET BALANCE = BALANCE - to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{withrawalAccountNumber};
     	 UPDATE ACCOUNT SET BALANCE = BALANCE + to_number(#{tranAmount}) WHERE ACCOUNT_NUMBER = #{depositAccountNumber};
-    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,PHONE_NUMBER)
-    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{phoneNumber});
+    	 INSERT INTO TRANSACTION_HISTORY(TRAN_NUM,DEPOSIT_ACCOUNT_NUM ,WITHRAWAL_ACCOUNT_NUM, DEPOSIT_NAME, WITHRAWAL_NAME,TRAN_AMOUNT,DEPOSIT_BANK_CODE,WITHRAWAL_BANK_CODE,WITHRAWAL_PHONE_NUMBER,DEPOSIT_PHONE_NUMBER)
+    	 VALUES(TRAN_HISTORY_NUM.NEXTVAL,#{depositAccountNumber},#{withrawalAccountNumber},#{depositName},#{withrawalName},to_number(${tranAmount}),#{depositBankCode},#{withrawalBankCode},#{withrawalPhoneNumber},#{depositPhoneNumber});
     	 COMMIT;
 	 EXCEPTION
      	WHEN OTHERS THEN 

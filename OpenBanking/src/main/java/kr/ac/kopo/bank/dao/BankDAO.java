@@ -38,6 +38,11 @@ public class BankDAO {
 		 
 		 System.out.println(list3);
 		
+		 List<BankVO> list5 = session.selectList("dao.BankDAO.checkoutSKBank",bankVO);
+		 
+		 System.out.println(list5);
+		
+		 
 	
 		 List<BankVO> list = new ArrayList<>();
 		 
@@ -45,8 +50,8 @@ public class BankDAO {
 		  list.addAll(list2);
 		  list.addAll(list3);
 		  list.addAll(list4);
-		 
-		System.out.println(list);
+		  list.addAll(list5);
+		  System.out.println(list);
 		
 		return list;
 	}
@@ -62,7 +67,7 @@ public class BankDAO {
 	  public BankVO checkAccountBKBANK(String accountNumber) { 
 		  BankVO bankVO = session.selectOne("dao.BankDAO.checkAccountBKBANK", accountNumber);
 	  
-	    return bankVO;
+		  return bankVO;
 	    }
 
 
@@ -71,7 +76,7 @@ public class BankDAO {
 	  public BankVO checkAccountJBBANK(String accountNumber) {
 		  BankVO bankVO = session.selectOne("dao.BankDAO.checkAccountJBBANK",accountNumber);
 	  
-	  return bankVO; 
+		  return bankVO; 
 	  }
 	
 	 
@@ -79,7 +84,13 @@ public class BankDAO {
 	  public BankVO checkAccountJHBANK(String accountNumber) { 
 		  BankVO bankVO = session.selectOne("dao.BankDAO.checkAccountJHBANK",accountNumber);
 	  
-	 return bankVO;
+		  return bankVO;
+	 }
+	
+	  public BankVO checkAccountSKBANK(String accountNumber) { 
+		  BankVO bankVO = session.selectOne("dao.BankDAO.checkAccountSKBANK",accountNumber);
+	  
+		  return bankVO;
 	 }
 	
 

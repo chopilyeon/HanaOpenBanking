@@ -21,12 +21,23 @@ public class CheckTransactionController implements Controller {
 		HttpSession session = request.getSession();
 		MemberVO userVO = (MemberVO)session.getAttribute("userVO");
 		
-		List<Map<String, Object>> transactionList = transactionService.checkoutTransaction(userVO.getPhoneNumber());
+		List<Map<String, Object>> depositTransactionList = transactionService.checkoutDepositTransaction(userVO.getPhoneNumber());
+		List<Map<String, Object>> withrawalTransactionList = transactionService.checkoutWithrawaltTransaction(userVO.getPhoneNumber());
 		
 		
-		request.setAttribute("transactionList", transactionList);
 		
-		System.out.println(transactionList);
+		
+		
+		
+		
+		request.setAttribute("depositTransactionList", depositTransactionList);
+
+		request.setAttribute("withrawalTransactionList", withrawalTransactionList);
+		
+		
+		
+		System.out.println(depositTransactionList);
+		System.out.println(withrawalTransactionList);
 		
 		return "/jsp/transaction/checkTransaction.jsp";
 	}

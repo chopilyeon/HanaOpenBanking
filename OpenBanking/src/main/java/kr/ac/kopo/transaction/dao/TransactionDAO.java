@@ -17,15 +17,15 @@ public class TransactionDAO {
 		System.out.println("session : "+ session);
 	}
 	
-	public List<Map<String, Object>> checkoutTransaction(String phoneNumber) {	 		
+	public List<Map<String, Object>> checkoutDepositTransaction(String DepositPhoneNumber) {	 		
 			 
 		// List<TransactionVO> transactionList = session.selectList("dao.TransactionDAO.checkTransaction",phoneNumber);	 
-		 List<Map<String, Object>> transactionList = session.selectList("dao.TransactionDAO.checkTransaction",phoneNumber);	 
-		 System.out.println(transactionList.toString());
+		 List<Map<String, Object>> depositTransactionList = session.selectList("dao.TransactionDAO.checkDepositTransaction",DepositPhoneNumber);	 
+		 System.out.println(depositTransactionList.toString());
 		 
 		 
 		
-		 for(Map<String, Object> data : transactionList) {
+		 for(Map<String, Object> data : depositTransactionList) {
 			 Set<String> keys = data.keySet();
 			 for(String key : keys) {
 				 System.out.println(key + " : " + data.get(key));
@@ -35,8 +35,34 @@ public class TransactionDAO {
 		 
 		 
 		 //return null;
-		 return transactionList;	 
-		}
+		 return depositTransactionList;	 
+	}
+	
+	
+	public List<Map<String, Object>> checkoutWithrawalTransaction(String withrawalPhoneNumber) {	 		
+			 
+		// List<TransactionVO> transactionList = session.selectList("dao.TransactionDAO.checkTransaction",phoneNumber);	 
+		 List<Map<String, Object>> withrawalTransactionList = session.selectList("dao.TransactionDAO.checkWithrawalTransaction",withrawalPhoneNumber);	 
+		 System.out.println(withrawalTransactionList.toString());
+		 
+		 
+		
+		 for(Map<String, Object> data : withrawalTransactionList) {
+			 Set<String> keys = data.keySet();
+			 for(String key : keys) {
+				 System.out.println(key + " : " + data.get(key));
+			 }
+		 }
+		 
+		 
+		 
+		 //return null;
+		 return withrawalTransactionList;	 
+	}
+	
+	
+	
+	
 	
 	
 }

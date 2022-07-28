@@ -27,7 +27,7 @@ public class TransferToAnotherProcessingController implements Controller {
 		    
 		MemberVO memberVO=(MemberVO)session.getAttribute("userVO");
 		    
-		String phoneNumber = memberVO.getPhoneNumber();	
+		String withrawalPhoneNumber = memberVO.getPhoneNumber();	
 		String withrawalBankName;
 		String depositBankCode;
 		String withrawalBankCode = "20";
@@ -37,6 +37,7 @@ public class TransferToAnotherProcessingController implements Controller {
 		String tranAmount = request.getParameter("tranAmount");	
 		String depositName = request.getParameter("depositName");
 		String withrawalName = request.getParameter("withrawalName");
+		String depositPhoneNumber = request.getParameter("depositPhoneNumber");
 		
 
 		if(bankService.checkAccountBANK(withrawalAccountNumber)!=null) {
@@ -76,9 +77,12 @@ public class TransferToAnotherProcessingController implements Controller {
 			depositBankCode="14";		
 		}else if(depositBankName.equals("JH_BANK")) {
 			depositBankCode="9";			
+		}else if(depositBankName.equals("쫑쫑뱅크")){
+			depositBankCode="3000";
 		}else {
 			depositBankCode="20";
 		}
+		
 		
 		withrawalBankName = bankService.checkBankName(withrawalBankCode).getBankName();
 		
@@ -98,7 +102,9 @@ public class TransferToAnotherProcessingController implements Controller {
 		 map.put("withrawalName", withrawalName);
 		 map.put("depositName",depositName);
 		 map.put("tranAmount", tranAmount);
-		 map.put("phoneNumber", phoneNumber);
+		 map.put("withrawalPhoneNumber", withrawalPhoneNumber);
+		 map.put("depositPhoneNumber",depositPhoneNumber);
+		 
 		
 		 
 		 

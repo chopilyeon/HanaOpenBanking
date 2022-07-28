@@ -118,6 +118,8 @@ public class TransferProcessingController implements Controller {
 	 map.put("depositName",depositName);
 	 map.put("tranAmount", tranAmount);
 	 map.put("phoneNumber",phoneNumber);
+	 map.put("withrawalPhoneNumber",memberVO.getPhoneNumber());
+	 map.put("depositPhoneNumber",memberVO.getPhoneNumber());
 
 
 	 

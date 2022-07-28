@@ -13,11 +13,21 @@ public class TransactionService {
 	}
 	
 	
-	public List<Map<String, Object>> checkoutTransaction(String phoneNumber){
+	public List<Map<String, Object>> checkoutDepositTransaction(String depositPhoneNumber){
 		
-		List<Map<String, Object>> transactionList = transactionDao.checkoutTransaction(phoneNumber);
-		return transactionList;
+		List<Map<String, Object>> depositTransactionList = transactionDao.checkoutDepositTransaction(depositPhoneNumber);
+		return depositTransactionList;
 	}
+
+	public List<Map<String, Object>> checkoutWithrawaltTransaction(String withrawalPhoneNumber){
+		
+		List<Map<String, Object>> withrawalTransactionList = transactionDao.checkoutWithrawalTransaction(withrawalPhoneNumber);
+		return withrawalTransactionList;
+	}
+	
+	
+	
+	
 	
 	
 	

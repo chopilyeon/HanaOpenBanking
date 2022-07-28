@@ -60,8 +60,17 @@ public class BankService {
 		  return userVO;
 	  }
 	 
+	  public BankVO checkAccountSKBANK(String accountNumber) {
+		  bankDao=new BankDAO();
+		  BankVO userVO=bankDao.checkAccountSKBANK(accountNumber);
+	  
+		  return userVO;
+	  }
 	 
+	 
+	  
 
+	  
 	
 	public BankVO checkBankName(String bankCode) {
 		bankDao=new BankDAO();
