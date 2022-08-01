@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<script>
+$(document).on('click','#clickAjax',function(){
+
+		withdrawalBank = value;	
+		$.ajax({
+		 
+			type:'get'
+			,url:'http://localhost:9887/OpenBanking/checkoutBank'
+			,data:{
+				withdrawalBank:withdrawalBank,
+				phoneNumber:"0"+${userVO.phoneNumber}
+			},datetype:'jsonp'
+			,success:callback	
+	
+			,error:function(){
+			alert('실패');
+			}
+	
+		})
+	}
+
+
+	 function callback(result){
+		console.log(result);
+		console.log("result의 크기"+result.length);
+		$('#withdrawalAccountNumber').empty();
+		$('#withdrawalAccountNumber').append('<option value="none">withrawalAccountNumber</option>');			
+		
+		 for(let i=0 ;i <result.length; i++){
+			let account = result[i];
+			let accountNumber = account.accountNumber;
+			let accountAlias = account.bankAlias;
+		
+			$('#withdrawalAccountNumber').append('<option value='+accountNumber+'>'+accountAlias+' '+accountNumber+'</option>');	
+ 		} 
+		 
+		
+	
+	
+	 }
+
+ 
+
+
+
+</script>
+
+
+
+
+
+
+
+<body>
+
+</body>
+</html>

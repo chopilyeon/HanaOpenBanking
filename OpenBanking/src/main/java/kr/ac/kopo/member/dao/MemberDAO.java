@@ -50,6 +50,11 @@ public class MemberDAO {
 		session.update("dao.MemberDAO.consentOpenBanking",userVO);
 		session.commit();
 	}
+
+	public String checkDuplicate(String duplicateId) {
+		String id = session.selectOne("dao.MemberDAO.duplicateId", duplicateId);
+		return id;
+	}
 	
 	
 	

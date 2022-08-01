@@ -43,6 +43,12 @@ public class MemberService {
 		
 	}
 	
+
+	public String checkDuplicate(String duplicateId) {
+		memberDao=new MemberDAO();
+		String id = memberDao.checkDuplicate(duplicateId);
+		return id;
+	}
 	
 	
 	

@@ -17,6 +17,12 @@
 		<result column ="reg_date" property="regDate"/>
 		<result column="type" property="type"/>
 		<result column="open_banking" property="openBanking"/>
+		<result column="sy_bank" property="syBank"/>
+		<result column="yk_bank" property="ykBank"/>
+		<result column="hj_bank" property="hjBank"/>
+
+		
+		
 	</resultMap>
 	
 	
@@ -28,9 +34,13 @@
 	
 	
 	<select id ="SignIn" parameterType="memberVO" resultMap="memberMap">
-		select name,password,identity,id,gender,phone_number,address,detail_address,type,zip_code,reg_date, open_banking 
+		select name,password,identity,id,gender,phone_number,address,detail_address,type,zip_code,reg_date, open_banking,sy_bank,yk_bank,hj_bank 
 		  from customer 
 		  where id=#{id}
+	</select>
+	
+	<select id ="duplicateId" parameterType="string" resultType="string">
+		select id from customer where id = #{id}
 	</select>
 	
 		

@@ -15,7 +15,7 @@ public class TransferToOtherAccountController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-HttpSession session = request.getSession();
+		HttpSession session = request.getSession();
 		
 		
 		MemberVO MemberVO = (MemberVO)session.getAttribute("userVO");

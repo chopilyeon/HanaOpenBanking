@@ -32,14 +32,55 @@
 
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    
+
+<script src ="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<script>
+$().ready(function () {
+            $("#alertStart").click(function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'KEEP GOING.',
+                    text: 'VALID ID',
+            });
+     });
+});
+        
+$().ready(function () {
+    $("#write_your_id").click(function () {
+        Swal.fire({
+            icon: 'success',
+            title: 'write id!',
+            text: 'INVALID ACTION',
+        });
+    });
+});
+        
+        
+$().ready(function () {
+    $("#noBlank").click(function () {
+        Swal.fire({
+            icon: 'success',
+            title: 'no Blank!',
+            text: 'INVALID ACTION',
+        });
+    });
+});        
+        
+        
+</script>
+
+
+
 <script>
 
 
 
 
 
-	
  document.addEventListener("DOMContentLoaded",()=>{
  	document.getElementById("click").click();
  	document.getElementById("click").style.display = 'none';
@@ -54,11 +95,19 @@
 
  	btn2.addEventListener("click",()=>{
  		document.location.href="${pageContext.request.contextPath}/";
- 	});
+ 	});  
  	
- 		
- });
+ 	$('#alertStart').hide();
+ 	$('#address').hide();
+ 	$('#phoneNumber').hide();
+ 	$('#password').hide();
+ 	$('#signUp').hide();
+	$('#write_your_id').hide();
+	$('#noBlank').hide();
  
+
+ 		
+ });  
  
  
 
@@ -67,62 +116,72 @@ function checkForm(){
 	let f = document.writeForm
 	
 	if(f.id.value==''){
-		alert('id를 입력하세요')
-
+	
+		$("#noBlank").click();
 
 		return false
 	}
 	
 	if(f.name.value==''){
-		alert('이름을 입력하세요')
-	
+
+		$("#noBlank").click();
+
 		return false
 	}
 	if(f.password.value==''){
-		alert('비밀번호를 입력하세요')
+
+		$("#noBlank").click();
 		
 		return false
 	}
 	
 	if(f.tel1.value==''||f.tel1.value.toString().length!=3){
-		alert('전화번호를 입력하세요')
+
+		$("#noBlank").click();
 	
 		return false
 	}
 	if(f.tel2.value==''||f.tel2.value.length!=4){
-		alert('전화번호를 입력하세요')
+
+		$("#noBlank").click();
 	
 		return false
 	}
 	if(f.tel3.value==''||f.tel3.value.toString().length!=4){
-		alert('전화번호를 입력하세요')
+
+		$("#noBlank").click();
 
 		return false
 	}
 	
 	if(f.iden_number1.value==''||f.iden_number1.value.toString().length!=6){
-		alert('주민등록번호를 입력하세요')
+
+		$("#noBlank").click();
 
 		return false
 	}
 	if(f.iden_number2.value==''||f.iden_number2.value.toString().length!=7){
-		alert('주민등록번호를 입력하세요')
+
+		$("#noBlank").click();
 
 		return false
 	}
 	
 	if(f.zipCode.value==''){
-		alert('우편번호를 입력하세요')
+
+		$("#noBlank").click();
 
 		return false
 	}
 	if(f.address.value==''){
-		alert('주소를 입력하세요')
+
+		$("#noBlank").click();
 
 		return false
 	}
 	if(f.detailAddress.value==''){
-		alert('주소를 입력하세요')
+
+		$("#noBlank").click();
 
 		return false
 	}
@@ -132,6 +191,9 @@ function checkForm(){
 	
 	return true;
 }	
+
+
+
 
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -179,17 +241,65 @@ function checkForm(){
                 document.getElementById("sample6_detailAddress").focus();
             }
         }).open();
-    }
+    } 
     
 </script>
 
+<script>
 
 
-
-
-
+$(document).on('click','#duplicate_check',function(){
+ 	
+	let id = $('#idForm').val();
 	
+	console.log(id);
+	
+	if(id != ''){
+	$.ajax({	 
+		type:'get'
+		,url:'http://localhost:9887/OpenBanking/checkId'
+		,data:{
+			id_check: id
+		},datetype:'jsonp'
+		,success:callback	
+		
+		,error:function(){
+			alert('실패');
+		}
+	
+	})
+	}else{
+		$('#write_your_id').click();
+	}
+	
+})
 
+
+ function callback(id){
+	
+	console.log("id값:" + id);
+	$('#checkMessage').empty();
+	
+	if(id != null){
+		$('#checkMessage').append('<div class="text-danger mt-2" style="font-size:24px;"> duplicated ID </div><br>');	
+	 	$('#address').hide();
+	 	$('#phoneNumber').hide();
+	 	$('#password').hide();
+	 	$('#signUp').hide();
+	
+	}else{	
+		$('#alertStart').click();
+	 	$('#address').show();
+	 	$('#phoneNumber').show();
+	 	$('#password').show();
+	 	$('#signUp').show();
+	 	
+	}
+		
+} 
+	
+	
+ 
 
 
 </script>
@@ -202,56 +312,72 @@ function checkForm(){
 
 
 
- 	<jsp:include page="/jsp/include/topAndSide.jsp" />
+<jsp:include page="/jsp/include/topAndSide.jsp" />
+
 	
 <section class="onlyfor">
-	
+
+
 	
 <!-- Button trigger modal -->
-<div class="d-flex justify-content-center">
+ <div class="d-flex justify-content-center">
 	<button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal" id="click">
   		SIGN UP
 	</button>
 </div>
 
+ 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">SIGN UP</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close1"></button>
       </div>
-      <div class="modal-body">
-     	<form action="${pageContext.request.contextPath}/Member/JoinProcess.do" method="post" name="writeForm" onsubmit="return checkForm()">
+      <div class="modal-body"> 
+      
+      
+  	<form action="${pageContext.request.contextPath}/Member/JoinProcess.do" method="post" name="writeForm" onsubmit="return checkForm()">
 			NAME<input type="text" name="name" size=20 placeholder="NAME" class="form-control"><br>
 			<div class="row g-3">
+			
 				<div>
 					social security number
 				</div>
+				
 				<div class="col-sm">
    				    <input type="text" class="form-control" placeholder="resident resistration number" aria-label="City" name="iden_number1" maxlength='6'>
   				</div>
+  				
   				<div class="col-sm">
    					<input type="password" class="form-control" placeholder="resident resistration number" aria-label="State" name="iden_number2" maxlength='7'>
-  				</div>
+  				</div>			
   			</div>
-  			<br>
-			ID <input type="text" name="id" size=20 placeholder="id" class="form-control"><br>
+  			
+  			<div class="mt-3">
+			ID <input type="text" name="id" size=20 placeholder="id" class="form-control" id="idForm"><br><button type="button" id="duplicate_check" class="btn btn-warning">duplicate check</button>		
+			</div>
+			<div id="checkMessage"></div>
+			<button id ="alertStart"></button>  
+			<button id ="write_your_id"></button>
+			<button id ="noBlank"></button>
+			<div class="mt-1" id="password">
 			PASSWORD<input type="password" name="password" size=20 placeholder="password" class="form-control"><br>
-			<div class="row g-3">
+			</div>
+			<div class="row g-3" id="address">
 				<div>
 					ADDRESS
 				</div>
 				<input type="text" id="sample6_postcode" placeholder="zipCode" name="zipCode">
-				<input type="button" onclick="sample6_execDaumPostcode()" value="FIND ADDRESS"><br>
+				<input type="button" onclick="sample6_execDaumPostcode()" value="FIND ADDRESS" class="btn btn-info"><br>
 				<input type="text" id="sample6_address" placeholder="Adress" name="address"><br>
 				<input type="text" id="sample6_detailAddress" placeholder="detail Address" name="detailAddress">
 				<input type="text" id="sample6_extraAddress" placeholder="reference" name="referAddress">
 			</div>
 			<br>
-			<div class="row g-3">
+			<div class="row g-3" id="phoneNumber">
 				<div>
 					PHONE NUMBER
 				</div>
@@ -268,20 +394,12 @@ function checkForm(){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close2">Close</button>
-        <button type="submit" class="btn btn-primary">SIGN UP</button>
+        <button type="submit" class="btn btn-primary" id="signUp">SIGN UP</button>
       </div>
     </div>
   </div>
-</div>
-</form>
-	
-	
-	
-	
-
-
-
-
+  </form> 
+</div> 
 
 
 
@@ -291,7 +409,7 @@ function checkForm(){
 </section>
 
 
-    <jsp:include page="/jsp/include/footer.jsp" />
+<jsp:include page="/jsp/include/footer.jsp" />
   	
 
 

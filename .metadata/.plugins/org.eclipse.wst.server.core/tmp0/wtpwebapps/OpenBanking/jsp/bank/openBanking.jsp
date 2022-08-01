@@ -101,6 +101,7 @@ document.addEventListener("DOMContentLoaded",()=>{
  				<p><a href="${pageContext.request.contextPath}/bank/transferToOtherAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">transferring to another account</a> </p>
 			</c:when>
 			<c:otherwise>
+				<p><a href="${pageContext.request.contextPath}/bank/checkoutAsset.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout my account</a> </p>  			
 				<p><a href="${pageContext.request.contextPath}/bank/openAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">open account</a> </p>
     			<p><a href="${pageContext.request.contextPath}/bank/transferToOtherAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">send money to my account</a> </p>
     			<p><a href="${pageContext.request.contextPath}/bank/openBankingAgreement.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">agree to open banking</a> </p>

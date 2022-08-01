@@ -37,7 +37,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
 <script>
-	function checkLogin(boardNum,subNum){	
+	function checkLogin(parentNum,subNum){	
 		<c:choose>
 		<c:when test="${empty userVO}">
 			if(confirm('로그인 후 사용이 가능합니다\n 로그인 페이지로 이동할까요?')){
@@ -48,7 +48,7 @@
 			
 		</c:when>
 		<c:otherwise>
-			location.href='${pageContext.request.contextPath}/board/detail.do?boardNo='+ boardNum +'&subNum='+subNum
+			location.href='${pageContext.request.contextPath}/board/detail.do?parentNum='+ parentNum +'&subNum='+subNum
 		</c:otherwise>
 	
 		</c:choose>  
@@ -72,7 +72,7 @@
 		<h2 class="text-center">Q & A </h2>	
 	<hr>
 	<div class="d-flex justify-content-center">
-		<img src="/OpenBanking/resources/images/bank.png" width="150" alt="homepage" />
+		<img src="/OpenBanking/resources/images/bank.png" width="200" alt="homepage" />
 	</div>
 	<c:if test="${userVO.type eq 'U' }">
 		<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/board/writeForm.do';">WRITE QUESTION</button>
@@ -106,7 +106,7 @@
 								<span> &nbsp;</span>
 							</c:forEach>
 						</c:if>
-						<a href="javascript:checkLogin(${boardList.boardNum },${boardList.subNum })">
+						<a href="javascript:checkLogin(${boardList.parentNum},${boardList.subNum})">
 						<c:out value="${boardList.title }" />
 						</a>
 						</td>
@@ -121,6 +121,11 @@
 	
 		</table>
 				
+				<%-- <div style="width:600px; text-align:center;margin-top:10px;">
+				<c:forEach var="i" begin="1" end="${(count mod 6)	}" step="1">
+					${i}
+				</c:forEach>
+				</div> --%>
 		
 		 <c:if test="${ userVO.type ne 'A' }"> 
 			<button type="button" class="btn btn-secondary"" onclick="location.href='${pageContext.request.contextPath}/board/writeForm.do'">WRITE QUESTION</button>

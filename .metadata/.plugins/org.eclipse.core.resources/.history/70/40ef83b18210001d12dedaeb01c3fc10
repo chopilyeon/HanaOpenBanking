@@ -1,0 +1,494 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>J investment bank</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/OpenBanking/resources/images/favicon.png">
+    <!-- Custom CSS -->
+    <link href="/OpenBanking/resources/css/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/OpenBanking/resources/css/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="/OpenBanking/resources/css/style.min.css" rel="stylesheet">
+    <link href="/OpenBanking/resources/css/onlyForMe.css" rel="stylesheet">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">	
+    
+    
+   
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>   
+   	<script src ="https://code.jquery.com/jquery-3.6.0.js"></script>
+ 	<!-- FONT -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+
+
+<script>
+
+let count ='${count}';
+let pageDisplay=3;
+let maxPage=5;
+console.log(count);
+	document.addEventListener("DOMContentLoaded",()=>{
+		$('.pagination').append('<li class="page-item"><button class="page-link prev">Previous</button></li>')
+ 		
+		
+		
+		for(let i=1; i<=count/3;i++){
+			let number = i;
+			console.log(number);
+			
+			$('.pagination').append(`<li class="page-item" id="page_item"><button class="page-link c`+i+`" id="c_`+i+`">`+i+`</button></li>`)
+ 			
+			if(i==5){
+				break;
+			}
+ 		
+		}
+ 		
+		
+		
+		
+		
+		
+		
+	    $('.pagination').append('<li class="page-item"><button class="page-link next">Next</button></li>')
+	 	
+	    
+
+	    const first = document.querySelector(".c1");
+	    const second = document.querySelector(".c2");
+	    const third = document.querySelector(".c3");
+	    const fourth = document.querySelector(".c4");
+	    const fifth = document.querySelector(".c5");
+	    const next = document.querySelector(".next");
+	    const prev = document.querySelector(".prev");
+
+
+
+
+	    function nextPage(){
+	    	
+
+	    	if(count > pageDisplay * maxPage){
+	    		console.log("next count는 "+count);
+	    		console.log("pageDisplay는"+pageDisplay);
+	    		console.log("maxPage는"+maxPage);
+	    		console.log(count - (pageDisplay * maxPage));
+	    		count = count - (pageDisplay * maxPage);
+	    		
+				if(count<pageDisplay*(maxPage-(maxPage-1))){
+	    			first.innerText = parseInt(first.innerText) + 5;
+	  
+	    			$('.c2').hide();
+	    			$('.c3').hide();
+	    			$('.c4').hide();
+	    			$('.c5').hide();
+				}else if(count<pageDisplay*(maxPage-(maxPage-2))){
+	    			first.innerText = parseInt(first.innerText) + 5;
+	    	    	second.innerText = parseInt(second.innerText) + 5;
+	 
+	    			$('.c3').hide();
+	    			$('.c4').hide();
+	    			$('.c5').hide();
+				}else if(count<pageDisplay*(maxPage-(maxPage-3))){
+					first.innerText = parseInt(first.innerText) + 5;
+	    	    	second.innerText = parseInt(second.innerText) + 5;
+	    	    	third.innerText = parseInt(third.innerText) + 5;
+
+	    	    	$('.c4').hide();
+	    			$('.c5').hide();				
+				}else if(count<pageDisplay*(maxPage-(maxPage-4))){
+					first.innerText = parseInt(first.innerText) + 5;
+	    	    	second.innerText = parseInt(second.innerText) + 5;
+	    	    	third.innerText = parseInt(third.innerText) + 5;
+	    	    	fourth.innerText = parseInt(fourth.innerText) + 5;
+
+	    			$('.c5').hide();
+					
+				}else{
+					first.innerText = parseInt(first.innerText) + 5;
+	    	    	second.innerText = parseInt(second.innerText) + 5;
+	    	    	third.innerText = parseInt(third.innerText) + 5;
+	    	    	fourth.innerText = parseInt(fourth.innerText) + 5;
+	    	    	fifth.innerText = parseInt(fifth.innerText) + 5;
+	
+				}
+				   	
+	    	}
+	    
+	    	console.log("최후 next count는"+count);
+	    }
+	    	
+
+
+	    function prevPage(){
+	    	console.log("초창기 prev count는 "+ count);
+	    	
+	    
+	    	if(first.innerText>=6){
+	    		count = count +(pageDisplay * maxPage);
+	    		
+	    		
+	    
+	    		
+	    	
+
+		    	console.log("prev count는"+count)
+		    	
+	    		first.innerText = parseInt(first.innerText) - 5;
+	    	
+	    		if($('.c2').is(".visible")){
+	    			second.innerText = parseInt(second.innerText) - 5;
+	    			$('.c2').show();			
+	    		}else{
+	    			$('.c2').show();
+	    		}
+	    		if($('.c3').is(".visible")){
+	    			third.innerText = parseInt(third.innerText) - 5;
+	    			$('.c3').show();			
+	    		}else{
+	    			$('.c3').show();
+	    		}
+	    		if($('.c4').is(".visible")){
+	    			fourth.innerText = parseInt(fourth.innerText) - 5;
+	    			$('.c4').show();			
+	    		}else{
+	    			$('.c4').show();
+	    		}
+	     		if($('.c5').is(".visible")){
+	    			fifth.innerText = parseInt(fifth.innerText) - 5;
+	    			$('.c5').show();			
+	    		}else{
+	    			$('.c5').show();
+	    		}
+	   
+	    	}
+	    }	
+	    	
+
+		
+		next.addEventListener("click",nextPage);
+		prev.addEventListener("click",prevPage);
+		
+	    
+	    
+ 	
+ 	});
+
+
+</script>
+	
+	
+
+
+
+
+<script>
+
+$(document).on('click','#page_item>button',function(){
+
+	
+		//ajax 통신을 해보자 
+		//let ajaxBoard=$(this).attr('id').split('_')[1]
+		
+		let ajaxBoard=$(this).text();
+		
+		console.log("ajaxBoard"+ajaxBoard);
+		
+		
+		$.ajax({
+			 
+			type:'get'
+			,url:'http://localhost:9887/OpenBanking/ajaxBoard'
+			,data:{
+				target:ajaxBoard
+			},datetype:'jsonp'
+			,success:callback	
+		
+			,error:function(){
+				alert('실패');
+			}
+		
+		})
+
+})
+
+
+
+function callback(result){
+	console.log(result);
+	$('#table_ajax').empty();
+	
+	
+
+ 	 for(let i=0; i < result.length; i++){
+		
+		let	ajaxData = result[i];
+		
+		let ajaxBoardNum = ajaxData.boardNum;
+		let ajaxId = ajaxData.id;
+		let ajaxRegDate = ajaxData.regDate;
+		let ajaxTitle = ajaxData.title;
+		let ajaxView = ajaxData.viewCnt;	
+		let ajaxSubNum = ajaxData.subNum;
+		let ajaxParentNum = ajaxData.parentNum;
+		
+		console.log("ajaxSubNum"+ajaxSubNum);
+		console.log("ajaxParentNum"+ajaxParentNum)
+			
+		//$('#table_ajax').append('<tr>');
+		$('#table_ajax').append('<tr><td class="table-light">'+ajaxBoardNum+'</td>');
+		
+		//$('#table_ajax').append('<td class="table-light" class="ajaxTitleAtag">');
+		//$('#table_ajax').append('<td class="table-light" class="ajaxTitleAtag">'+ajaxTitle+'</td>');
+		
+		$('#table_ajax').append('<td class="table-light" class="ajaxTitleAtag"><a href="javascript:checkLogin(' + ajaxParentNum + ',' +  ajaxSubNum+ ')">' + ajaxTitle + '</a></td>');
+		
+	
+		
+		//$('#table_ajax').append(`<a href="javascript:checkLogin(${ajaxParentNum},${ajaxSubNum})">`);
+		//$('#table_ajax').append(ajaxTitle);
+		/* if(ajaxSubNum>=1){
+			for(let i=0; i<=ajaxSubNum;i++){
+				$('#tablex_aja').append('<span>'+aaa+'</span>');
+			}
+		}   */
+	 	//$('#table_ajax').append('</td>');
+		//$('#table_ajax').append('</a>');
+		$('#table_ajax').append('<td class="table-light">'+ajaxId+'</td><td class="table-light">'+ajaxRegDate+'</td><td class="table-light">'+ajaxView+'</td></tr>');
+		
+		
+		//$('#table_ajax').append('<td class="table-light">'+ajaxRegDate+'</td>');
+		//$('#table_ajax').append('<td class="table-light">'+ajaxView+'</td></tr>');
+		//$('#table_ajax').append('</tr>');
+
+	
+		
+ 	 } 
+	 
+ 	
+	 	
+ 	 
+ 	   const ajaxBody =  document.getElementsById('table_ajax');
+ 	   ajaxBody.classList.add('table-group-divider');
+	
+	
+		
+
+}
+ 
+
+
+</script>	
+	
+	
+	
+	
+	
+	
+<script>
+	function checkLogin(parentNum,subNum){	
+		<c:choose>
+		<c:when test="${empty userVO}">
+			if(confirm('로그인 후 사용이 가능합니다\n 로그인 페이지로 이동할까요?')){
+				location.href="${pageContext.request.contextPath}/login.do"
+			}
+				
+				
+			
+		</c:when>
+		<c:otherwise>
+			location.href='${pageContext.request.contextPath}/board/detail.do?parentNum='+ parentNum +'&subNum='+subNum
+		</c:otherwise>
+	
+		</c:choose>  
+	} 
+
+</script>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+	<jsp:include page="/jsp/include/topAndSide.jsp" />
+	
+	
+	
+	
+	
+	<section>
+	<hr>
+		<h2 class="text-center">Q & A </h2>	
+	<hr>
+	<div class="d-flex justify-content-center">
+		<img src="/OpenBanking/resources/images/bank.png" width="200" alt="homepage" />
+	</div>
+	<c:if test="${userVO.type eq 'U' }">
+		<button type="button" class="btn btn-secondary" onclick="location.href='${pageContext.request.contextPath}/board/writeForm.do';">WRITE QUESTION</button>
+	</c:if>
+	
+	
+	
+		<div class="d-flex justify-content-center">
+	
+			<div class="container" id="container">
+			<div class="row">
+				<div class="col-md-3"></div>
+					<div class="col-md-9">
+	
+				
+		<table style="width:80%" class="table float-left border border-2">
+			  	<thead>
+					<tr class="table-light p-5">
+						<th width="16%" class="">#</th>
+						<th width="50%" class="">TITLE</th>
+						<th width="16%" class="">WRITER</th>
+						<th width="40%" class="">DATE</th>
+						<th width="50%" class="">VIEW</th>
+					</tr>
+			  </thead>	
+		<tbody class="table-group-divider" id="table_ajax">
+				<c:forEach items="${ ajaxList }" var="ajaxList" varStatus="loop">
+					<tr>
+						<td class="table-light">${ ajaxList.boardNum }</td>
+						<td class="table-light">
+						<c:if test="${ajaxList.subNum ge 1 }">
+							<c:forEach var="i" begin="0" end="${ajaxList.subNum}">
+								<span> &nbsp;</span>
+							</c:forEach>
+						</c:if>
+						<a href="javascript:checkLogin(${ajaxList.parentNum},${ajaxList.subNum})">
+						<c:out value="${ajaxList.title }" />
+						</a>
+						</td>
+						<td class="table-light">${ ajaxList.id }</td>
+						<td class="table-light">${ ajaxList.regDate }</td>
+						<td class="table-light">${ ajaxList.viewCnt }</td>
+					</tr>
+				</c:forEach>
+		</tbody>
+		
+				
+	
+		</table>
+		
+		
+		
+			</div>
+			
+			
+			</div>
+		
+			<div class="d-flex justify-content-center pt-5">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination" id="result">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					</ul>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				</nav>
+			
+			
+			
+			
+			
+			
+			
+			
+			</div>
+		
+		
+		
+		
+		
+		
+		
+		
+	
+
+	
+	</section>
+	
+	
+	
+	
+	<jsp:include page="/jsp/include/footer.jsp" />
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ <script src="/OpenBanking/resources/js/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="/OpenBanking/resources/js/bootstrap.bundle.min.js"></script>
+    <script src="/OpenBanking/resources/js/app-style-switcher.js"></script>
+    <script src="/OpenBanking/resources/js/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="/OpenBanking/resources/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="/OpenBanking/resources/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="/OpenBanking/resources/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="/OpenBanking/resources/js/chartist.min.js"></script>
+    <script src="/OpenBanking/resources/js/chartist-plugin-tooltip.min.js"></script>
+    <script src="/OpenBanking/resources/js/dashboard1.js"></script>
+
+	
+	
+	
+</body>
+</html>

@@ -19,18 +19,21 @@ public class BoardDetailFormController implements Controller {
 		String id = request.getParameter("id");
 		String content = request.getParameter("content");
 		String title = request.getParameter("title");	
-		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
-		System.out.println("boardNum:"+boardNum);
+		int parentNum = Integer.parseInt(request.getParameter("parentNum"));
+		System.out.println("boardNum:"+parentNum);
 		
 		
 		BoardService boardService = new BoardService();
 		
-		int maxSubNum = boardService.selectMaxSub(boardNum);
+		int maxSubNum = boardService.selectMaxSub(parentNum);
 		
+		for(int i=0;i<maxSubNum;i++) {
+			stb.append(" ");
+		}
 	
 
 			
-			stb.append("└");
+		stb.append("└");
 	
 		
 		
@@ -40,13 +43,13 @@ public class BoardDetailFormController implements Controller {
 		BoardVO boardVO = new BoardVO();
 		boardVO.setContent(content);
 		boardVO.setId(id);
-		boardVO.setBoardNum(boardNum);
+		boardVO.setParentNum(parentNum);
 		boardVO.setSubNum(maxSubNum+1);
 		boardVO.setTitle(stb.toString());
 		
 		boardService.insertSubBoard(boardVO);
 		
-		List<BoardVO> boardDetailList= boardService.selectBoardByNo(boardNum);
+		List<BoardVO> boardDetailList= boardService.selectBoardByNo(parentNum);
 	
 		request.setAttribute("boardDetailList", boardDetailList);
 		

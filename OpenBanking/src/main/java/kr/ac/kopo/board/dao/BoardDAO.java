@@ -62,6 +62,24 @@ public class BoardDAO {
 		
 	}
 	
+	public int countBoard() {
+		
+		int count = session.selectOne("dao.BoardDAO.countBoardNum");
+		return count;
+	}
+	
+	public List<BoardVO> ajaxBoard(int displayPage) {
+		
+		List<BoardVO> list = session.selectList("dao.BoardDAO.ajaxBoard",displayPage);
+		return list;
+	}
+	
+	public List<BoardVO> ajaxList(int ajaxNumber){
+		
+		List<BoardVO> list = session.selectList("dao.BoardDAO.ajaxRowNum",ajaxNumber);
+		return list;
+	}
+		
 	
 	
 	

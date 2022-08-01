@@ -161,6 +161,17 @@
                                 <span class="hide-menu">Q&A</span>
                             </a>
                         </li>
+                        
+                        
+                        
+                          <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="${pageContext.request.contextPath}/board/ajax.do"
+                                aria-expanded="false">
+                                <i class="fas fa-eye-dropper" aria-hidden="true"></i>
+                                <span class="hide-menu">AJAX BOARD</span>
+                            </a>
+                        </li>
+                  
                   
 
       

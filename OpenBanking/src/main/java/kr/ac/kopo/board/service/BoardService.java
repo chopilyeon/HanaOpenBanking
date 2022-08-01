@@ -52,5 +52,26 @@ public class BoardService {
 		
 	}
 	
+	public int countBoard() {
+		boardDao = new BoardDAO();
+		int count = boardDao.countBoard();
+		return count;
+	}
+	public List<BoardVO> ajaxBoard(int displayPage) {
+		boardDao = new BoardDAO();
+		List<BoardVO> list = boardDao.ajaxBoard(displayPage);
+		return list;
+	}
+	
+	public List<BoardVO> ajaxList(int ajaxNumber) {
+		boardDao = new BoardDAO();
+		List<BoardVO> list = boardDao.ajaxList(ajaxNumber);
+		return list;
+	}
+	
+	
+
+	
+	
 	
 }

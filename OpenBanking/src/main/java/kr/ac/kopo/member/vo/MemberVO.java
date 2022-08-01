@@ -14,6 +14,48 @@ public class MemberVO {
 	private String detailAddress;//
 	private String zipCode;//
 	private String openBanking;
+	private String syBank;
+	public String getSyBank() {
+		return syBank;
+	}
+	public void setSyBank(String syBank) {
+		this.syBank = syBank;
+	}
+	public String getYkBank() {
+		return ykBank;
+	}
+	public void setYkBank(String ykBank) {
+		this.ykBank = ykBank;
+	}
+	public String getHjBank() {
+		return hjBank;
+	}
+	public void setHjBank(String hjBank) {
+		this.hjBank = hjBank;
+	}
+	private String ykBank;
+	public MemberVO(String name, String id, String identity, String password, String regDate, String gender,
+			String phoneNumber, String address, String type, String detailAddress, String zipCode, String openBanking,
+			String syBank, String ykBank, String hjBank) {
+		super();
+		this.name = name;
+		this.id = id;
+		this.identity = identity;
+		this.password = password;
+		this.regDate = regDate;
+		this.gender = gender;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.type = type;
+		this.detailAddress = detailAddress;
+		this.zipCode = zipCode;
+		this.openBanking = openBanking;
+		this.syBank = syBank;
+		this.ykBank = ykBank;
+		this.hjBank = hjBank;
+	}
+	private String hjBank;
+	
 	
 	public String getName() {
 		return name;
@@ -92,7 +134,8 @@ public class MemberVO {
 		return "MemberVO [name=" + name + ", id=" + id + ", identity=" + identity + ", password=" + password
 				+ ", regDate=" + regDate + ", gender=" + gender + ", phoneNumber=" + phoneNumber + ", address="
 				+ address + ", type=" + type + ", detailAddress=" + detailAddress + ", zipCode=" + zipCode
-				+ ", openBanking=" + openBanking + "]";
+				+ ", openBanking=" + openBanking + ", syBank=" + syBank + ", ykBank=" + ykBank + ", hjBank=" + hjBank
+				+ "]";
 	}
 	public MemberVO(String name, String id, String identity, String password, String regDate, String gender,
 			String phoneNumber, String address, String type, String detailAddress, String zipCode, String openBanking) {

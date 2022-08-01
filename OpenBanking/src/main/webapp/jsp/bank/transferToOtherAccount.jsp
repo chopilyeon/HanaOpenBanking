@@ -30,11 +30,67 @@
    
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>   
-   
+<script src ="https://code.jquery.com/jquery-3.6.0.js"></script>
+   	   
  <!-- FONT -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+
+<script>
+console.log(String("0"+${userVO.phoneNumber}));
+console.log(typeof String(${userVO.phoneNumber}))
+let withdrawalBank;
+	let selectBoxChange = function(value){
+		console.log("값 테스트" + value);
+		withdrawalBank = value;	
+		$.ajax({
+		 
+			type:'get'
+			,url:'http://localhost:9887/OpenBanking/checkoutBank'
+			,data:{
+				withdrawalBank:withdrawalBank,
+				phoneNumber:"0"+${userVO.phoneNumber}
+			},datetype:'jsonp'
+			,success:callback	
+	
+			,error:function(){
+			alert('실패');
+			}
+	
+		})
+	}
+
+
+	 function callback(result){
+		console.log(result);
+		console.log("result의 크기"+result.length);
+		$('#withdrawalAccountNumber').empty();
+		$('#withdrawalAccountNumber').append('<option value="none">withrawalAccountNumber</option>');			
+		
+		 for(let i=0 ;i <result.length; i++){
+			let account = result[i];
+			let accountNumber = account.accountNumber;
+			let accountAlias = account.bankAlias;
+		
+			$('#withdrawalAccountNumber').append('<option value='+accountNumber+'>'+accountAlias+' '+accountNumber+'</option>');	
+ 		} 
+		 
+		
+	
+	
+	 }
+
+ 
+
+
+
+</script>
+
+
+
+
+
 
 </head>
 <body>
@@ -66,33 +122,42 @@
 						<h4 class="mt-3">NAME OF DEPOSITOR </h4>
 							<h4>${userVO.name}</h4>				
 						</div>	
+						<c:if test="${ userVO.openBanking eq 'Y'}"> 
+					 	<div class="box-text m-3 border">
+							<h4 class="mt-3">WITHRAWAL ACCOUNT NUMBER</h4>
+							<select class="mb-3 form-select" name="withrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);">
+								<option value="none">SELECT BANK</option>
+								<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+								<option value="BK_BANK">BK_BANK</option>
+								<option value="BERRY_BANK">BERRY_BANK</option>
+								<option value="JH_BANK">JH_BANK</option>
+							</select>
+						</div>
+					 </c:if>
+ 					 <c:if test="${ userVO.openBanking ne 'Y'}"> 
 						<div class="box-text m-3 border">
 							<h4 class="mt-3">WITHRAWAL ACCOUNT NUMBER</h4>
-							<select class="mb-3 form-select" name="withrawalAccountNumber">
-								<option value="none">withrawalAccountNumber</option>
-								<c:forEach items="${ bankList}" var="bankList">
-									<c:choose>
-										<c:when test="${userVO.openBanking eq 'Y'}">									
-											<option value="${bankList.accountNumber}">[${bankList.bankName}] ${bankList.accountNumber}</option>
-										</c:when>
-										<c:otherwise>
-											<c:if test="${bankList.bankName eq 'J INVESTMENT BANK' }">
-											<option value="${bankList.accountNumber}">[${bankList.bankName}] ${bankList.accountNumber}</option>
-											</c:if>
-										</c:otherwise> 
-									</c:choose>		
-								</c:forEach>
+							<select class="mb-3 form-select" name="withrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);">
+								<option value="none">SELECT BANK</option>
+								<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
 							</select>
-						</div>	
+						</div>
+					
+						
+					</c:if>
+						<div id="withrawalAccountNumberList">
+							<select class="mb-3 form-select" name="withrawalAccountNumber" id="withdrawalAccountNumber">
+								
+							</select>						
+						</div>
 						<div class="box-text m-3 border">
-						<h4 class="mt-3">DEPOSIT BANK NAME</h4>
+							<h4 class="mt-3">DEPOSIT BANK NAME</h4>
 							<select class="mb-3 form-select" name="depositBankName">
 								<option value="none">SELECT BANK</option>
-								<option value="J INVESTMENT BANK">J INVESTMENT BANK</option>
-								<option value="BYUNGKWAN_BANK">BYUNGKWAN_BANK</option>
-								<option value="JUNGBIN_BANK">JUNGBIN_BANK</option>
-								<option value="JIHUN_BANK">JIHUN_BANK</option>
-								<option value="쫑쫑뱅크">쫑쫑뱅크</option>			
+								<option value="J_INVESTMENT_BANK">J INVESTMENT BANK</option>
+								<option value="BK_BANK">BK_BANK</option>
+								<option value="BERRY_BANK">BERRY_BANK</option>
+								<option value="JH_BANK">JH_BANK</option>
 							</select>
 						</div>
 						<div class="input-group input-group-sm mb-3">

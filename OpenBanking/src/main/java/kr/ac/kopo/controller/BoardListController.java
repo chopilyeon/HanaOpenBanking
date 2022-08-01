@@ -17,11 +17,11 @@ public class BoardListController implements Controller {
 		
 		
 		BoardService boardService = new BoardService();
-		
+		int count = boardService.countBoard();
 		List<BoardVO> boardList = boardService.selectAllBoard();
 		
 		request.setAttribute("boardList", boardList);
-		
+		request.setAttribute("count", count);
 		
 		return "/jsp/board/boardList.jsp";
 	}

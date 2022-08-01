@@ -140,7 +140,7 @@
     			 <div class="modal-body">
      	 			 <p class="fs-6 text-center">PLEASE WRITE TITLE AND CONTENT</p>
      	  		
-     	 			 <p class="fs-6 text-center">THANK YOU   ${userVO.id}! <p>
+     	 			 <p class="fs-6 text-center">THANK YOU ${userVO.id}! <p>
    
      
      	   

@@ -109,5 +109,28 @@ public class BankService {
 	
 	
 	
+	public List<BankVO> checkWithrawalBank(BankVO userVO){
+		bankDao=new BankDAO();
+		List<BankVO> bankList = bankDao.checkWithrawalBank(userVO);
+		return bankList;
+		
+	}
+	public List<BankVO> checkWithrawalBKBank(BankVO userVO){
+		bankDao=new BankDAO();
+		List<BankVO> bankList = bankDao.checkWithrawalBKBank(userVO);
+		return bankList;
+		
+	}	public List<BankVO> checkWithrawalJHBank(BankVO userVO){
+		bankDao=new BankDAO();
+		List<BankVO> bankList = bankDao.checkWithrawalJHBank(userVO);
+		return bankList;
+		
+	}	public List<BankVO> checkWithrawalJBBank(BankVO userVO){
+		bankDao=new BankDAO();
+		List<BankVO> bankList = bankDao.checkWithrawalJBBank(userVO);
+		return bankList;
+		
+	}
+	
 	
 }

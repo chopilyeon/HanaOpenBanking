@@ -79,7 +79,7 @@
 		</tr>
 		<tr>
 			<th width="25%">ADDRESS</th>
-			<td>${userVO.address}${userVO.detailAddress}</td>
+			<td>${userVO.address} ${userVO.detailAddress}</td>
 			
 		</tr>
 		<tr>

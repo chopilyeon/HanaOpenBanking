@@ -178,7 +178,7 @@
 	
 	<form action="${pageContext.request.contextPath}/board/writeDetailForm.do" method="post" name="writeForm" onsubmit="return checkForm()">
 
-		<input type="hidden" name = "boardNum" value="${ boardDetailList[0].boardNum }">
+		<input type="hidden" name = "parentNum" value="${ boardDetailList[0].parentNum }">
 		<input type="hidden" name ="id" value="${userVO.id}">
 		<table border="1" style="width:80%" class="table">
 			<tr>

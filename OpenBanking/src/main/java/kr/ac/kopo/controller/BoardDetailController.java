@@ -16,19 +16,19 @@ public class BoardDetailController implements Controller {
 		request.setCharacterEncoding("utf-8");
 		BoardService boardService = new BoardService();
 
-		int boardNo =Integer.parseInt(request.getParameter("boardNo"));
+		int parentNum =Integer.parseInt(request.getParameter("parentNum"));
 		int subNum =Integer.parseInt(request.getParameter("subNum"));
 		System.out.println("subNum :"+subNum);
 		
 		BoardVO boardVO = new BoardVO();
-		boardVO.setBoardNum(boardNo);
+		boardVO.setParentNum(parentNum);
 		boardVO.setSubNum(subNum);
 		System.out.println(boardVO);
 		
 		boardService.plusView(boardVO);
 		
 		
-		List<BoardVO> boardDetailList = boardService.selectBoardByNo(boardNo);
+		List<BoardVO> boardDetailList = boardService.selectBoardByNo(parentNum);
 		
 		
 		

@@ -32,6 +32,60 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
+
+<script>
+console.log(String("0"+${userVO.phoneNumber}));
+console.log(typeof String(${userVO.phoneNumber}))
+let withdrawalBankName;
+	let selectBoxChange = function(value){
+		console.log("값 테스트" + value);
+		withdrawalBankName = value;	
+		$.ajax({
+		 
+			type:'get'
+			,url:'http://localhost:9887/OpenBanking/checkoutBank'
+			,data:{
+				withdrawalBank:withdrawalBankName,
+				phoneNumber:"0"+${userVO.phoneNumber}
+			},datetype:'jsonp'
+			,success:callback	
+	
+			,error:function(){
+			alert('실패');
+			}
+	
+		})
+	}
+
+
+	 function callback(result){
+		console.log(result);
+		console.log("result의 크기"+result.length);
+		$('#MyAccount').empty();
+		$('#transferLimitList').empty();
+		$('#MyAccount').append('<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success">');			
+		
+		 for(let i=0 ;i <result.length; i++){
+			let account = result[i];
+			let accountNumber = account.accountNumber;
+			let accountAlias = account.bankAlias;
+			let accountBankName = account.bankName;
+			let transferLimit = account.transferLimit;
+			let balance = account.balance;
+		
+			$('#MyAccount').append('<h5 class="fw-bold text-dark">'+accountBankName +' '+ accountAlias +	accountNumber +'<p>balance : '+' ' + balance +' '+ 'WON </p></h5></li></span></div>');	
+			$('#transferLimitList').append('<div><li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5 class="fw-bold text-dark">account : '+accountNumber + '<p> transfer limit : ' + transferLimit +' WON </p></h5></li></div>');                           
+		 
+		 
+		 } 
+		 
+                           	
+	
+	
+	 }
+</script>
+
+
     
   
     
@@ -82,24 +136,30 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="white-box analytics-info">
                         	 <img src="/OpenBanking/resources/images/bank.png" width="50" alt="homepage" />
+                        	 <select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);">
+								<option value="none">SELECT BANK</option>
+								<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+								<option value="BK_BANK">BK_BANK</option>
+								<option value="BERRY_BANK">BERRY_BANK</option>
+								<option value="JH_BANK">JH_BANK</option>
+							</select>
                             <h3 class="box-title">MY ACCOUNT</h3>
-                            <ul class="list-inline two-part mb-0">
-                                <li>
-                                   <%--  <div id="sparklinedash"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div>
- --%>                           </li>
-                                <c:forEach items="${ bankList}" var="bankList">                                	                     	
+                            <ul class="list-inline two-part mb-0" id="MyAccount">                                
+                          
+                                <%-- <c:forEach items="${ bankList}" var="bankList">                                	                     	
                                 	<div>
- 									<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5 class="fw-bold text-dark">${bankList.bankName} ${bankList.bankAlias}	${bankList.accountNumber} 
+ 									<li class="ms-auto"><span class="counter text-success">
+ 									<li class="ms-auto"><span class="counter text-success">
+ 									<h5 class="fw-bold text-dark">${bankList.bankName} ${bankList.bankAlias}	${bankList.accountNumber} 
  									<p>
  									balance: ${bankList.balance } WON
  									</p>
- 									</h5></li>   
+ 									</h5>
+ 									</li>   
  									                           
                                 	</span>
                                 	</div>                                	
-                           		</c:forEach>
+                           		</c:forEach>  --%>
                            
                             </ul>
                         </div>
@@ -108,13 +168,9 @@
                         <div class="white-box analytics-info">
                          <img src="/OpenBanking/resources/images/bank.png" width="50" alt="homepage" />
                             <h3 class="box-title">transfer limit</h3>
-                            <ul class="list-inline two-part mb-0">
-                                <li>
-                                    <%-- <div id="sparklinedash2"><canvas width="67" height="30"
-                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-                                    </div> --%>
-                                </li>
-                                  <c:forEach items="${ bankList}" var="bankList">                                	                     	
+                            <ul class="list-inline two-part mb-0" id="transferLimitList">
+                              
+                               <%--    <c:forEach items="${ bankList}" var="bankList">                                	                     	
                                 	<div>
  									<li class="ms-auto"><span class="counter text-success"><li class="ms-auto"><span class="counter text-success"><h5 class="fw-bold text-dark">account: ${bankList.accountNumber} 
  									<p>
@@ -124,7 +180,7 @@
                           
                                 	</div>   
                                       	
-                           		 </c:forEach>
+                           		 </c:forEach> --%>
                            		 
                             </ul>
                         </div>

@@ -49,7 +49,9 @@
 				<div class="row">
 				<div class="col-md-1"></div>
 					<div class="col-md-11">
-			<h3>${userVO.id}'S DEPOSIT TRANSACTION HISTORY</h3>
+					<div class="d-flex justify-content-center mb-3">
+						<h3>${userVO.id}'S DEPOSIT TRANSACTION HISTORY</h3>
+					</div>
 				<table  class="table" style="width:100%;">
 			  	<thead>
 					<tr class="table-light">
@@ -81,8 +83,9 @@
 				</c:forEach>
 		</tbody>
 		</table>
-		<h3>${userVO.id}'S WITHDRAWAL TRANSACTION HISTORY</h3>
-		
+		<div class="d-flex justify-content-center mt-5 mb-3">
+			<h3>${userVO.id}'S WITHDRAWAL TRANSACTION HISTORY</h3>
+		</div>
 		<table  class="table" style="width:100%;">
 			  	<thead>
 					<tr class="table-light">
@@ -115,102 +118,42 @@
 		</tbody>
 		</table>
 		
-		
-					</div>
-				</div>
-			</div>
-			</div>
-			<%-- <table  class="table btn" >
-			  	<thead>
-					<tr class="table-light">
-						<th width="10%" class="">TRANSACTION NUMBER</th>
-						<th width="10%" class="">TRANSACTION DATE</th>
-						<th width="16%" class="">WITHRAWAL BANK</th>
-						<th width="16%" class="">DEPOSIT BANK</th>
-						<th width="16%" class="">WITHRAWAL ACCOUNT NUMBER</th>
-						<th width="16%" class="">DEPOSIT ACCOUNT NUMBER</th>
-						<th width="10%" class="">SENDER </th>
-						<th width="10%" class="">DEPOSITOR</th>
-						<th width="10%" class="">AMOUNT</th>
-						
-					</tr>
-			  </thead>	
-		<tbody class="table-group-divider">
-				<c:forEach items="${ transactionList}" var="transactionList" varStatus="loop">
-					<tr>
-					 	<td class="table-light">${ transactionList['TRANNUM'] }</td>
-						<td class="table-light">${ transactionList['TRANDATE']}</td>
-						<td class="table-light">${ transactionList['WITHRAWALBANKNAME'] }</td>
-						<td class="table-light">${ transactionList['DEPOSITBANKNAME'] }</td>
-						<td class="table-light">${ transactionList['WITHRAWALACCOUNTNUM'] }</td>
-						<td class="table-light">${ transactionList['DEPOSITACCOUNTNUM'] }</td>
-						<td class="table-light">${ transactionList['WITHRAWALNAME']}</td>
-						<td class="table-light">${ transactionList['DEPOSITNAME'] }</td>
-						<td class="table-light">${ transactionList['TRANAMOUNT'] }</td>					 
-					</tr>
-				</c:forEach>
-		</tbody>
-		</table>
-		</div>
+		 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ 
+	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-				
-				 --%>
-				
-					
-	<%-- 
-	
-		</table>
-			
-			</div>
-		</div>
-	</div>
-	
-	<div>
-		<table style="width:50%" class="table btn">
-			  	<thead>
-					<tr class="table-light p-5">
-						<th width="16%" class="p-5">TRANSACTION NUMBER</th>
-						<th width="16%" class="p-5">TRANSACTION DATE</th>
-						<th width="16%" class="p-5">WITHRAWAL BANK</th>
-						<th width="16%" class="p-5">DEPOSIT BANK</th>
-						<th width="40%" class="p-5">WITHRAWAL ACCOUNT NUMBER</th>
-						<th width="40%" class="p-5">DEPOSIT ACCOUNT NUMBER</th>
-						<th width="40%" class="p-5">SENDER </th>
-						<th width="40%" class="p-5">DEPOSITOR</th>
-						<th width="40%" class="p-5">AMOUNT</th>
-						
-					</tr>
-			  </thead>	
-		<tbody class="table-group-divider">
-				<c:forEach items="${ transactionList}" var="transactionList" varStatus="loop">
-					<tr>
-					 	<td class="table-light">${ transactionList['TRANNUM'] }</td>
-						<td class="table-light">${ transactionList['TRANDATE']}</td>
-						<td class="table-light">${ transactionList['WITHRAWALBANKNAME'] }</td>
-						<td class="table-light">${ transactionList['DEPOSITBANKNAME'] }</td>
-						<td class="table-light">${ transactionList['WITHRAWALACCOUNTNUM'] }</td>
-						<td class="table-light">${ transactionList['DEPOSITACCOUNTNUM'] }</td>
-						<td class="table-light">${ transactionList['WITHRAWALNAME']}</td>
-						<td class="table-light">${ transactionList['DEPOSITNAME'] }</td>
-						<td class="table-light">${ transactionList['TRANAMOUNT'] }</td>					 
-					</tr>
-				</c:forEach>
-		</tbody> --%>
-		
-					
-				
-				
-				
-					
-	
-<!-- 	
-		</table>
-	</div>				
 
- -->
-	
-	
-	
+<div class="mt-5">
+	<figure class="highcharts-figure">
+ 		 <div id="deposit"></div>
+  			<p class="highcharts-description">
+   				 Highcharts has extensive support for time series, and will adapt
+    			intelligently to the input data. Click and drag in the chart to zoom in
+   				 and inspect the data.
+  			</p>
+	</figure>
+</div>	
+
+
+
+
+<div class="mt-5">
+	<figure class="highcharts-figure">
+ 		 <div id="withdrawal"></div>
+  			<p class="highcharts-description">
+   				 Highcharts has extensive support for time series, and will adapt
+    			intelligently to the input data. Click and drag in the chart to zoom in
+   				 and inspect the data.
+  			</p>
+	</figure>
+</div>	
+
+
 	
 </section>
 
@@ -225,12 +168,146 @@
 	
 	
 	
+
+	
+<script>
+Highcharts.getJSON(
+	    'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+	    function (data) {
+
+	        Highcharts.chart('deposit', {
+	            chart: {
+	                zoomType: 'x'
+	            },
+	            title: {
+	                text: '${userVO.name}님의 입금액'
+	            },
+	            subtitle: {
+	                text: document.ontouchstart === undefined ?
+	                    'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+	            },
+	            xAxis: {
+	                type: 'datetime'
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'deposit'
+	                }
+	            },
+	            legend: {
+	                enabled: false
+	            },
+	            plotOptions: {
+	                area: {
+	                    fillColor: {
+	                        linearGradient: {
+	                            x1: 0,
+	                            y1: 0,
+	                            x2: 0,
+	                            y2: 1
+	                        },
+	                        stops: [
+	                            [0, Highcharts.getOptions().colors[0]],
+	                            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                        ]
+	                    },
+	                    marker: {
+	                        radius: 2
+	                    },
+	                    lineWidth: 1,
+	                    states: {
+	                        hover: {
+	                            lineWidth: 1
+	                        }
+	                    },
+	                    threshold: null
+	                }
+	            },
+
+	            series: [{
+	                type: 'area',
+	                name: 'USD to EUR',
+	                data: data
+	            }]
+	        });
+	    }
+	);
+
+
+</script>
+	
+	
+<script>
+Highcharts.getJSON(
+	    'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
+	    function (data) {
+
+	        Highcharts.chart('withdrawal', {
+	            chart: {
+	                zoomType: 'x'
+	            },
+	            title: {
+	                text: '${userVO.name}님의 지출액'
+	            },
+	            subtitle: {
+	                text: document.ontouchstart === undefined ?
+	                    'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+	            },
+	            xAxis: {
+	                type: 'datetime'
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'withdrawal'
+	                }
+	            },
+	            legend: {
+	                enabled: false
+	            },
+	            plotOptions: {
+	                area: {
+	                    fillColor: {
+	                        linearGradient: {
+	                            x1: 0,
+	                            y1: 0,
+	                            x2: 0,
+	                            y2: 1
+	                        },
+	                        stops: [
+	                            [0, Highcharts.getOptions().colors[0]],
+	                            [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                        ]
+	                    },
+	                    marker: {
+	                        radius: 2
+	                    },
+	                    lineWidth: 1,
+	                    states: {
+	                        hover: {
+	                            lineWidth: 1
+	                        }
+	                    },
+	                    threshold: null
+	                }
+	            },
+
+	            series: [{
+	                type: 'area',
+	                name: 'USD to EUR',
+	                data: data
+	            }]
+	        });
+	    }
+	);
+
+
+</script>	
 	
 	
 	
 	
-	
-	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>	
  <script src="/OpenBanking/resources/js/jquery.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="/OpenBanking/resources/js/bootstrap.bundle.min.js"></script>

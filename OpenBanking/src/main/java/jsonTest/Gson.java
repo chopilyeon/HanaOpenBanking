@@ -21,26 +21,22 @@ public class Gson extends HttpServlet{
 		System.out.println("service(): 실제 작업이 수행되는 메소드입니다. 요청이 들어올때마다 호출됩니다.");
 		
 		   
-	     PrintWriter out=response.getWriter(); 
-	 	out.println("<html>"); // out 이 통로를 통해서 html 문서를 넘기겠다는 의미임
-		out.println(" <head>");
-		out.println("    <title>메소드 요청방식</title>");
-		out.println(" </head>");
-		out.println(" <body>");
-		out.println("   ========================================<br>");
-		out.println("          &nbsp;&nbsp;&nbsp;출력결과<br>");
-		out.println("  파라미터(id):"+"<br>");
-		out.println("  요청방식:");
-		out.println("  uri:"+"<br>");
-		
-		out.println("   ========================================<br>");
-
-		out.println("   ========================================<br>");
-		out.println(" </body>");
-		out.println("</html");
-	     System.out.println("안녕");
-	     out.println("안녕하세요");
+	    PrintWriter out=response.getWriter(); 
+	    if(request.getParameter("term").equals("1개월")) {
 	    
+	    	
+	    	
+	    }else if(request.getParameter("term").equals("3개월")){
+	    
+	    	
+	    	
+	    }else if(request.getParameter("term").equals("1년")) {
+	    
+	    	
+	    	
+	    }
+	    
+	 		    
 		
 		
 	}

@@ -1,0 +1,45 @@
+package kr.ac.kopo.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import kr.ac.kopo.board.service.BoardService;
+import kr.ac.kopo.board.vo.BoardVO;
+
+public class BoardAjaxController implements Controller {
+
+	@Override
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		
+		
+
+		
+		BoardService boardService = new BoardService();
+		int count = boardService.countBoard();
+		List<BoardVO> boardList = boardService.selectAllBoard();
+		
+		int displayPage = 3;
+		List<BoardVO> ajaxList = boardService.ajaxBoard(displayPage);
+		
+
+		request.setAttribute("ajaxList", ajaxList);
+		System.out.println("ajaxList"+ ajaxList);
+		
+		request.setAttribute("boardList", boardList);
+		request.setAttribute("count", count);
+		System.out.pritntln(count);
+		
+		
+		
+		
+		
+		
+		
+		
+		return "/jsp/board/ajaxBoard.jsp";
+	}
+
+}

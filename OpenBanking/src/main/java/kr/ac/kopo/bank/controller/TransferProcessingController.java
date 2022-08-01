@@ -122,19 +122,31 @@ public class TransferProcessingController implements Controller {
 	 map.put("depositPhoneNumber",memberVO.getPhoneNumber());
 
 
+		  
+		  
+		 if(withrawalBankCode.equals("20")&&depositBankCode.equals("20")) {
+			  bankService.transferToOtherAccountAllSame(map);
+		 }else if(withrawalBankCode.equals("20")&&!depositBankCode.equals("20")){
+			  bankService.transferToOtherAccountAtDeposit(map); 
+		 }else if(!withrawalBankCode.equals("20")&&depositBankCode.equals("20")){
+			  bankService.transferToOtherAccountAtWithrawal(map); 
+		 }else{
+			  bankService.transferToOtherAccountAllDifferent(map);
+		 }
+		 
+		 
+		 /*
+		 if(depositBankCode.equals(withrawalBankCode){
+		 
+		 
+		 }
+	 
+	 	*/
 	 
 	 
-
-	if(withrawalBankCode.equals("20")&&depositBankCode.equals("20")) {
-		bankService.transferToOtherAccountAllSame(map);
-	}else if(withrawalBankCode.equals("20")&&!depositBankCode.equals("20")){
-		bankService.transferToOtherAccountAtDeposit(map);	
-	}else if(!withrawalBankCode.equals("20")&&depositBankCode.equals("20")){
-		bankService.transferToOtherAccountAtWithrawal(map);
-	}else{
-		bankService.transferToOtherAccountAllDifferent(map);
-	}
 	 
+	
+	
 	Date date = new Date();
 	SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss yyyy-MM-dd");
 

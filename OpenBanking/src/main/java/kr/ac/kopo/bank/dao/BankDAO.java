@@ -103,6 +103,31 @@ public class BankDAO {
 		return bankVO;
 
 	}
+	
+	public List<BankVO> checkWithrawalBank(BankVO userVO) {
+		List<BankVO> bankList = session.selectList("dao.BankDAO.checkoutBank", userVO);
+		return bankList;
+	}
+	
+	public List<BankVO> checkWithrawalBKBank(BankVO userVO) {
+		List<BankVO> bankList = session.selectList("dao.BankDAO.checkoutBKBank", userVO);
+		return bankList;
+	}
+	
+	public List<BankVO> checkWithrawalJHBank(BankVO userVO) {
+		List<BankVO> bankList = session.selectList("dao.BankDAO.checkoutJHBank", userVO);
+		return bankList;
+	}
+	
+	public List<BankVO> checkWithrawalJBBank(BankVO userVO) {
+		List<BankVO> bankList = session.selectList("dao.BankDAO.checkoutJBBank", userVO);
+		return bankList;
+	}
+	
+	
+	
+	
+	
 
 	public void transferToOtherAccountAtWithrawal(Map map) {
 		session.update("dao.BankDAO.transferToOtherAccountAtWithrawal", map);

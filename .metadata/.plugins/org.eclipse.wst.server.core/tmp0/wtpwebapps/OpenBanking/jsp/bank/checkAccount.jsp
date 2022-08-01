@@ -37,6 +37,139 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
 
+<script>
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+console.log(String("0"+${userVO.phoneNumber}));
+console.log(typeof String(${userVO.phoneNumber}))
+let withdrawalBankName;
+	let selectBoxChange = function(value){
+		
+	if(value=="J_INVESTMENT_BANK" || "BK_BANK" || "BERRY_BANK" || "JH_BANK" ){
+		console.log("값 테스트" + value);
+		withdrawalBankName = value;	
+		$.ajax({
+		 
+			type:'get'
+			,url:'http://localhost:9887/OpenBanking/checkoutBank'
+			,data:{
+				withdrawalBank:withdrawalBankName,
+				phoneNumber:"0"+${userVO.phoneNumber}
+			},datetype:'jsonp'
+			,success:callback	
+	
+			,error:function(){
+			alert('실패');
+			}
+	
+			})
+		}else{
+			console.log("값 테스트" + value);
+			withdrawalBankName = value;	
+			let bankCode;
+			if(withdrawalBankName=="SY_BANK"){
+				bankCode="01";
+			}else if(withdrawalBankName=="YK_BANK"){
+				bankCode="02";
+			}else if(withdrawalBankName=="HJ_BANK"){
+				bankCode="03";
+			}
+			
+			$.ajax({
+			 
+				type:'post'
+				,url:'http://132.226.23.122/TeamTwoOpenAPI/AccountList.json',
+				,data:{
+					key:"FR587250820200O4HL8RQNR5" 
+					bankCode:bankCode,
+					tel:"0"+${userVO.phoneNumber}
+				},datetype:'jsonp'
+				,success:callback2			
+				,error:function(){
+				alert('실패');
+				}
+		
+				})
+			
+			
+		
+		
+		
+	}
+	
+	
+}
+
+	 function callback(result){
+		console.log(result);
+		console.log("result의 크기"+result.length);
+		$('#MyAccount').empty();
+		 for(let i=0 ;i <result.length; i++){
+			let account = result[i];
+			let accountNumber = account.accountNumber;
+			let accountAlias = account.bankAlias;
+			let accountBankName = account.bankName;
+			let transferLimit = account.transferLimit;
+			let balance = account.balance;
+		
+			$('#MyAccount').append('<div class="col-lg-6 col-xs-12 text-center"><div class="box border border-4 rounded-3 m-5 w-75"><div><div><img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage"/></div><i class="fa fa-behance fa-3x" aria-hidden="true"></i><div class="box-title"><h3>'+ accountBankName +'</h3></div><hr><div class="box-text m-2"><h3>BALANCE</h3><h5>'+balance+' WON</h5></div><hr><div class="box-btn"><h3>TRANSFER LIMIT</h3><h5>'+transferLimit+ ' WON</h5></div><hr><div class="box-btn"><h3>BANK NAME</h3><h5>'+ accountBankName + '</h5></div><hr><div class="box-btn"><h3>ACCOUNT NUMBER</h3><h5>'+accountNumber+'</h5></div></div></div>');		 
+		 } 	
+	 }
+	 
+
+	 function callback2(result){
+		console.log(result);
+		console.log("result의 크기"+result.length);
+		$('#MyAccount').empty();
+		 for(let i=0 ;i <result.length; i++){
+			let account = result[i];
+			let accountNumber = account.accountNumber;
+			let accountName = account.accountName;
+			let balance = account.balance;
+		
+			$('#MyAccount').append('<div class="col-lg-6 col-xs-12 text-center"><div class="box border border-4 rounded-3 m-5 w-75"><div><div><img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage"/></div><i class="fa fa-behance fa-3x" aria-hidden="true"></i><div class="box-title"><h3>'+ accountBankName +'</h3></div><hr><div class="box-text m-2"><h3>BALANCE</h3><h5>'+balance+' WON</h5></div><hr><div class="box-btn"><h3>TRANSFER LIMIT</h3><h5>'+transferLimit+ ' WON</h5></div><hr><div class="box-btn"><h3>BANK NAME</h3><h5>'+ accountBankName + '</h5></div><hr><div class="box-btn"><h3>ACCOUNT NUMBER</h3><h5>'+accountNumber+'</h5></div></div></div>');		 
+		 } 	
+	 }
+	 
+	 
+	 
+	 
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 </head>
 <body>
@@ -45,22 +178,124 @@
 	<jsp:include page="/jsp/include/topAndSide.jsp" />
 	
 	<section>
-	<hr>
+	
 	<h1 class="text-center m-5 ">
 		${userVO.id}'s Bank Account
 	</h1>
 	<hr>
-
+    <div class="d-flex justify-content-end m-5">
+	<c:if test="${userVO.syBank eq 'Y' and userVO.hjBank eq 'Y' and userVO.ykBank eq 'Y' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+		 	<option value="SY_BANK">SY_BANK</option>
+		 	<option value="HJ_BANK">HJ_BANK</option>
+		 	<option value="YK_BANK">YK_BANK</option>	
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'Y' and userVO.hjBank eq 'Y'  and userVO.ykBank eq 'N' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+	 		<option value="SY_BANK">SY_BANK</option>
+		 	<option value="HJ_BANK">HJ_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'Y' and userVO.hjBank eq 'N' and userVO.ykBank eq 'Y' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+	 		<option value="SY_BANK">SY_BANK</option>
+		 	<option value="YK_BANK">YK_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'N' and userVO.hjBank eq 'Y' and userVO.ykBank eq 'Y' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+		 	<option value="HJ_BANK">HJ_BANK</option>
+		 	<option value="YK_BANK">YK_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'N' and userVO.hjBank eq 'N' and userVO.ykBank eq 'Y' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+		 	<option value="YK_BANK">YK_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'N' and userVO.hjBank eq 'Y' and userVO.ykBank eq 'N' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+		 	<option value="HJ_BANK">HJ_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'Y' and userVO.hjBank eq 'N' and userVO.ykBank eq 'N' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+	 		<option value="SY_BANK">SY_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'N' and userVO.hjBank eq 'N' and userVO.ykBank eq 'N' and userVO.openBanking eq 'Y'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		 	<option value="BK_BANK">BK_BANK</option>
+		 	<option value="BERRY_BANK">BERRY_BANK</option>
+		 	<option value="JH_BANK">JH_BANK</option>
+		</select>
+	</c:if>	
+	<c:if test="${userVO.syBank eq 'N' and userVO.hjBank eq 'N' and userVO.ykBank eq 'N' and userVO.openBanking eq 'N'}">      
+		<select class="mb-3 form-select" name="withdrawalBankName" id="withdrawalAccountBank" onchange="selectBoxChange(this.value);" style="width:250px;">
+			<option value="none">SELECT BANK</option>
+		 	<option value="J_INVESTMENT_BANK">J_INVESTMENT_BANK</option>
+		</select>
+	</c:if>	
+	
+	
+	
+	
+	
+	
+	</div>
+	<div class="d-flex justify-content-center">
+    	<h3 class="box-title">MY ACCOUNT</h3>
+    </div>  
 	<div class="social-box m-2 p-2">
 	    <div class="container">
-	     	<div class="row m-5">
+	     	<div class="row m-5" id="MyAccount">
 	     	<c:forEach items="${ bankList }" var="bankList" varStatus="loop">
 	     	
+			<c:if test="${ bankList.bankName eq 'J_INVESTMENT_BANK'}">  	
 			    <div class="col-lg-6 col-xs-12 text-center">
 					<div class="box border border-4 rounded-3 m-5 w-75">
 					<div>
   						<img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage" />
 					</div>
+								
 	                    <i class="fa fa-behance fa-3x" aria-hidden="true"></i>
 						<div class="box-title">
 							<h3>${ bankList.bankAlias }</h3>
@@ -93,88 +328,12 @@
 							ACCOUNT NUMBER
 							</h3>
 						    <h5>${ bankList.accountNumber }</h5>
-						</div>
-						
-						
-						
+						</div>		
 					 </div>
 				</div>	 
+				</c:if>
 			</c:forEach>	
-				<!-- 
-				 <div class="col-lg-6 col-xs-12  text-center">
-					<div class="box border m-5 w-75">
-					    <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
-						<div class="box-title">
-							<h3>Twitter</h3>
-						</div>
-						<div class="box-text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-						<div class="box-btn">
-						    <a href="#">Learn More</a>
-						</div>
-					 </div>
-				</div>	 
-				
-				 <div class="col-lg-12 col-xs-12 text-center">
-					<div class="box border">
-	                    <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
-						<div class="box-title">
-							<h3>Facebook</h3>
-						</div>
-						<div class="box-text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-						<div class="box-btn">
-						    <a href="#">Learn More</a>
-						</div>
-					 </div>
-				</div>	 
-				
-				<div class="col-lg-12 col-xs-12 text-center">
-					<div class="box border">
-	                    <i class="fa fa-pinterest-p fa-3x" aria-hidden="true"></i>
-						<div class="box-title">
-							<h3>Pinterest</h3>
-						</div>
-						<div class="box-text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-						<div class="box-btn">
-						    <a href="#">Learn More</a>
-						</div>
-					 </div>
-				</div>	 
-				
-				<div class="col-lg-12 col-xs-12 text-center">
-					<div class="box border">
-					    <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
-						<div class="box-title">
-							<h3>Google</h3>
-						</div>
-						<div class="box-text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-						<div class="box-btn">
-						    <a href="#">Learn More</a>
-						</div>
-					 </div>
-				</div>	 
-				
-				<div class="col-lg-12 col-xs-12 text-center">
-					<div class="box border">
-	                    <i class="fa fa-github fa-3x" aria-hidden="true"></i>
-						<div class="box-title">
-							<h3>Github</h3>
-						</div>
-						<div class="box-text">
-							<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-						</div>
-						<div class="box-btn">
-						    <a href="#">Learn More</a>
-						</div>
-					 </div>
-				</div> -->
+			
 			</div>		
 	    </div>
 	</div>

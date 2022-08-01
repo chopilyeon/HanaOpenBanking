@@ -8,14 +8,33 @@ public class BoardVO {
 	private String regDate;
 	private int subNum;
 	private int viewCnt;
+	private int parentNum;
 	public String getId() {
 		return id;
+	}
+	public BoardVO(String id, int boardNum, String title, String content, String regDate, int subNum, int viewCnt,
+			int parentNum) {
+		super();
+		this.id = id;
+		this.boardNum = boardNum;
+		this.title = title;
+		this.content = content;
+		this.regDate = regDate;
+		this.subNum = subNum;
+		this.viewCnt = viewCnt;
+		this.parentNum = parentNum;
 	}
 	public BoardVO(String id, String title, String content) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.content = content;
+	}
+	public int getParentNum() {
+		return parentNum;
+	}
+	public void setParentNum(int parentNum) {
+		this.parentNum = parentNum;
 	}
 	public void setId(String id) {
 		this.id = id;

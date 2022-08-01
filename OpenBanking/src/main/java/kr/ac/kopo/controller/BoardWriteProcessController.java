@@ -35,7 +35,7 @@ public class BoardWriteProcessController implements Controller {
 		
 		
 		
-		return "redirect:/board/list.do";
+		return "redirect:/board/ajax.do";
 	}
 
 }
