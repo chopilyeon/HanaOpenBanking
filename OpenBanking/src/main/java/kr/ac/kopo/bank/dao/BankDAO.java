@@ -135,14 +135,17 @@ public class BankDAO {
 
 	public void transferToOtherAccountAllDifferent(Map map) {
 		session.update("dao.BankDAO.transferToOtherAccountAllDifferent", map);
+
 	}
 
 	public void transferToOtherAccountAllSame(Map map) {
 		session.update("dao.BankDAO.transferToOtherAccountAllSame", map);
+
 	}
 
 	public void transferToOtherAccountAtDeposit(Map map) {
 		session.update("dao.BankDAO.transferToOtherAccountAtDeposit", map);
+	
 	}
 
 }

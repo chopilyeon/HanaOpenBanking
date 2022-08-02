@@ -49,11 +49,11 @@ public class TransferToAnotherProcessingController implements Controller {
 		};
 
 		if(bankService.checkAccountJBBANK(withrawalAccountNumber)!=null) {
-			withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
+			withrawalBankCode=bankService.checkAccountJBBANK(withrawalAccountNumber).getBankCode();		
 		};
 
 		if(bankService.checkAccountJHBANK(withrawalAccountNumber)!=null) {
-			withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
+			withrawalBankCode=bankService.checkAccountJHBANK(withrawalAccountNumber).getBankCode();		
 		};
 		
 		

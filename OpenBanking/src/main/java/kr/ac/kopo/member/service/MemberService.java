@@ -44,6 +44,30 @@ public class MemberService {
 	}
 	
 
+	
+	public void consentSYBanking(MemberVO userVO) {
+		memberDao=new MemberDAO();
+		memberDao.consentSYBanking(userVO);
+		
+	}
+
+	
+	public void consentYKBanking(MemberVO userVO) {
+		memberDao=new MemberDAO();
+		memberDao.consentYKBanking(userVO);
+		
+	}
+
+	
+	public void consentHJBanking(MemberVO userVO) {
+		memberDao=new MemberDAO();
+		memberDao.consentHJBanking(userVO);
+		
+	}
+	
+	
+	
+
 	public String checkDuplicate(String duplicateId) {
 		memberDao=new MemberDAO();
 		String id = memberDao.checkDuplicate(duplicateId);

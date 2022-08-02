@@ -50,6 +50,22 @@ public class MemberDAO {
 		session.update("dao.MemberDAO.consentOpenBanking",userVO);
 		session.commit();
 	}
+	
+	public void consentSYBanking(MemberVO userVO) {
+		session.update("dao.MemberDAO.consentSYBanking",userVO);
+		session.commit();
+	}
+	public void consentYKBanking(MemberVO userVO) {
+		session.update("dao.MemberDAO.consentYKBanking",userVO);
+		session.commit();
+	}
+	public void consentHJBanking(MemberVO userVO) {
+		session.update("dao.MemberDAO.consentHJBanking",userVO);
+		session.commit();
+	}
+	
+	
+	
 
 	public String checkDuplicate(String duplicateId) {
 		String id = session.selectOne("dao.MemberDAO.duplicateId", duplicateId);

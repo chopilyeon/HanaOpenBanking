@@ -52,8 +52,7 @@ let withdrawalBank;
 				withdrawalBank:withdrawalBank,
 				phoneNumber:"0"+${userVO.phoneNumber}
 			},datetype:'jsonp'
-			,success:callback	
-	
+			,success:callback		
 			,error:function(){
 			alert('실패');
 			}

@@ -24,8 +24,8 @@ public class TransferProcessingController implements Controller {
     
     MemberVO memberVO=(MemberVO)session.getAttribute("userVO");
     
-	String phoneNumber = memberVO.getPhoneNumber();			
-	String withrawalBankName;	
+	
+	String withrawalBankName = request.getParameter("withrawalBankName");	
 	String depositBankName;
 	String depositBankCode = "20";
 	String withrawalBankCode = "20";
@@ -36,13 +36,13 @@ public class TransferProcessingController implements Controller {
 	String withrawalName = request.getParameter("withrawalName");
 	
 	
-	System.out.println(withrawalName);
-	System.out.println(depositName);
-	System.out.println(tranAmount);
 	
-	System.out.println("controller bankcode depositBankCode : " + withrawalBankCode);
 	
-	System.out.println("controller bankcode withrawalBankCode : " + depositBankCode);
+	System.out.println("찍는다 depositAccountNumber"+depositAccountNumber);
+	System.out.println("찍는다 withdrawalAccountNumber"+withrawalAccountNumber);
+	
+	
+	
 	
 	if(bankService.checkAccountBANK(withrawalAccountNumber)!=null) {
 		withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
@@ -54,11 +54,11 @@ public class TransferProcessingController implements Controller {
 	
 
 	if(bankService.checkAccountJHBANK(withrawalAccountNumber)!=null) {
-		withrawalBankCode=bankService.checkAccountBANK(withrawalAccountNumber).getBankCode();		
+		withrawalBankCode=bankService.checkAccountJHBANK(withrawalAccountNumber).getBankCode();		
 	};
 	
 	if(bankService.checkAccountJBBANK(withrawalAccountNumber)!=null) {
-		withrawalBankCode=bankService.checkAccountBKBANK(withrawalAccountNumber).getBankCode();
+		withrawalBankCode=bankService.checkAccountJBBANK(withrawalAccountNumber).getBankCode();
 	};
 	
 	
@@ -78,27 +78,33 @@ public class TransferProcessingController implements Controller {
 	};
 	
 	if(bankService.checkAccountJBBANK(depositAccountNumber)!=null) {
-		depositBankCode=bankService.checkAccountBKBANK(depositAccountNumber).getBankCode();		
+		depositBankCode=bankService.checkAccountJBBANK(depositAccountNumber).getBankCode();		
 	};
 	
 	if(bankService.checkAccountJHBANK(depositAccountNumber)!=null) {
-		depositBankCode=bankService.checkAccountBKBANK(depositAccountNumber).getBankCode();		
+		depositBankCode=bankService.checkAccountJHBANK(depositAccountNumber).getBankCode();		
 	};
 	
 	
 	
 	
+
+	System.out.println("controller에서 찍는다 bankcode depositBankCode : " + withrawalBankCode);
+	System.out.println("controller에서 찍는다 bankcode withrawalBankCode : " + depositBankCode);
 	
 	
-	System.out.println("controller bankcode depositBankCode : " + depositBankCode);
+	System.out.println("controller bankcode depositBankCode 찍으면? : " + depositBankCode);
 	 
-	System.out.println("controller bankcode withrawalBankCode : " + withrawalBankCode);
+	System.out.println("controller bankcode withrawalBankCode 찍으면? : " + withrawalBankCode);
 	
 	 BankVO withrawalBankName1 = bankService.checkBankName(withrawalBankCode);
 	 BankVO depositBankName1 = bankService.checkBankName(depositBankCode);
 	 
-	 System.out.println(depositBankName1);
-	 System.out.println(withrawalBankName1);
+	 System.out.println("depositBankName :" + depositBankName1);
+	 System.out.println("withdrawalBankName:" + withrawalBankName1);
+	 
+	
+	 
 	 
 	 withrawalBankName = withrawalBankName1.getBankName();
 
@@ -117,11 +123,10 @@ public class TransferProcessingController implements Controller {
 	 map.put("withrawalName", withrawalName);
 	 map.put("depositName",depositName);
 	 map.put("tranAmount", tranAmount);
-	 map.put("phoneNumber",phoneNumber);
 	 map.put("withrawalPhoneNumber",memberVO.getPhoneNumber());
 	 map.put("depositPhoneNumber",memberVO.getPhoneNumber());
 
-
+	 System.out.println(map);
 		  
 		  
 		 if(withrawalBankCode.equals("20")&&depositBankCode.equals("20")) {
@@ -135,14 +140,6 @@ public class TransferProcessingController implements Controller {
 		 }
 		 
 		 
-		 /*
-		 if(depositBankCode.equals(withrawalBankCode){
-		 
-		 
-		 }
-	 
-	 	*/
-	 
 	 
 	 
 	

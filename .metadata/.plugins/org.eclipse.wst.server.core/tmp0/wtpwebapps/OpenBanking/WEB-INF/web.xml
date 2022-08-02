@@ -76,6 +76,20 @@
      </servlet-mapping> 
   	
   
+  	 <servlet>
+   		<servlet-name>checkoutDepositBank</servlet-name>
+   		<servlet-class>jsonTest.checkoutDepositBank</servlet-class>
+    </servlet>
+   
+  	
+
+  	 <servlet-mapping>
+   		<servlet-name>checkoutDepositBank</servlet-name>
+   		<url-pattern>/checkoutDepositBank</url-pattern>    
+     </servlet-mapping> 
+  	
+  
+  
   
   
   

@@ -93,20 +93,45 @@ document.addEventListener("DOMContentLoaded",()=>{
     <div class="modal-body">
     
     	 <c:choose>
-			<c:when test="${ userVO.openBanking eq 'Y'}"> 	
-				<p><a href="${pageContext.request.contextPath}/bank/checkoutHistoryLog.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout transaction log</a> </p>  			
-				<p><a href="${pageContext.request.contextPath}/bank/checkoutAsset.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout my account</a> </p>  			
-				<p><a href="${pageContext.request.contextPath}/bank/openAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">open account</a> </p>
- 				<p><a href="${pageContext.request.contextPath}/bank/transferToMyAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">send money to my account</a> </p>
- 				<p><a href="${pageContext.request.contextPath}/bank/transferToOtherAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">transferring to another account</a> </p>
+			<c:when test="${ userVO.openBanking eq 'Y'}"> 
+				<div class="d-flex justify-content-center">	
+					<p><a href="${pageContext.request.contextPath}/bank/checkoutHistoryLog.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout transaction log</a></p>  			
+				</div>
+				<div class="d-flex justify-content-center">	
+					<p><a href="${pageContext.request.contextPath}/bank/checkoutAsset.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout my account</a> </p>  			
+				</div>
+				<div class="d-flex justify-content-center">
+					<p><a href="${pageContext.request.contextPath}/bank/openAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">open account</a> </p>
+ 				</div>
+ 				<div class="d-flex justify-content-center">
+ 					<p><a href="${pageContext.request.contextPath}/bank/transferToMyAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">send money to my account</a></p>
+ 				</div>
+ 				<div class="d-flex justify-content-center">
+ 					<p><a href="${pageContext.request.contextPath}/bank/transferToOtherAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">transferring to another account</a></p>
+				</div>
+				<div class="d-flex justify-content-center">
+					<p><a href="${pageContext.request.contextPath}/bank/useAnotherBank.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">use other banks</a></p>	
+				</div>
 			</c:when>
 			<c:otherwise>
-				<p><a href="${pageContext.request.contextPath}/bank/checkoutAsset.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout my account</a> </p>  			
-				<p><a href="${pageContext.request.contextPath}/bank/openAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">open account</a> </p>
-    			<p><a href="${pageContext.request.contextPath}/bank/transferToOtherAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">send money to my account</a> </p>
-    			<p><a href="${pageContext.request.contextPath}/bank/openBankingAgreement.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">agree to open banking</a> </p>
-				<p>If you would like to transfer to another bank and view transaction log,</p>
- 				<p> please agree to the open banking service</p>
+				<div class="d-flex justify-content-center">
+					<p><a href="${pageContext.request.contextPath}/bank/checkoutAsset.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">checkout my account</a> </p>  			
+				</div>
+				<div class="d-flex justify-content-center">
+					<p><a href="${pageContext.request.contextPath}/bank/openAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">open account</a> </p>
+    			</div>
+    			<div class="d-flex justify-content-center">		
+    				<p><a href="${pageContext.request.contextPath}/bank/transferToOtherAccount.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">send money to my account</a> </p>
+    			</div>
+    			<div class="d-flex justify-content-center">
+   					<p><a href="${pageContext.request.contextPath}/bank/openBankingAgreement.do" role="button" class="btn btn-secondary" data-bs-toggle="popover" title="Popover title" data-bs-content="Popover body content is set in this attribute.">agree to open banking</a> </p>
+				</div>
+				<div class="d-flex justify-content-center">
+					<p>If you would like to transfer to another bank and view transaction log,</p>
+ 				</div>
+ 				<div class="d-flex justify-content-center">
+ 					<p> please agree to the open banking service</p>
+ 				</div>
  			</c:otherwise>
 		</c:choose>
 

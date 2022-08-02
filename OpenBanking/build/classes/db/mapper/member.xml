@@ -57,6 +57,19 @@
 	</update>
 	
 	
+	<update id="consentSYBanking" parameterType="memberVO">
+		update customer set SY_BANK='Y' where id=#{id}
+	</update>
+	
+	
+	<update id="consentYKBanking" parameterType="memberVO">
+		update customer set YK_BANK='Y' where id=#{id}
+	</update>
+	
+	
+	<update id="consentHJBanking" parameterType="memberVO">
+		update customer set HJ_BANK='Y' where id=#{id}
+	</update>
 	
 	
 

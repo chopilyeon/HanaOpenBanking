@@ -44,7 +44,7 @@
 <script>
 
 let count ='${count}';
-let pageDisplay=3;
+let pageDisplay=6;
 let maxPage=5;
 console.log(count);
 	document.addEventListener("DOMContentLoaded",()=>{
@@ -52,7 +52,7 @@ console.log(count);
  		
 		
 		
-		for(let i=1; i<=count/3;i++){
+		for(let i=1; i<=Math.ceil(count/6);i++){
 			let number = i;
 			console.log(number);
 			

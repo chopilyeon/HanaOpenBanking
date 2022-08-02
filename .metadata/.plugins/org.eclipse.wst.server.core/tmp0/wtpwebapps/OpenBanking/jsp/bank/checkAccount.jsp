@@ -67,9 +67,10 @@ console.log(String("0"+${userVO.phoneNumber}));
 console.log(typeof String(${userVO.phoneNumber}))
 let withdrawalBankName;
 	let selectBoxChange = function(value){
-		
-	if(value=="J_INVESTMENT_BANK" || "BK_BANK" || "BERRY_BANK" || "JH_BANK" ){
-		console.log("값 테스트" + value);
+	console.log("value값 뭐들어오지?:"+ value)	
+	console.log(value == "BERRY_BANK");
+	if(value==="J_INVESTMENT_BANK"||value==="BK_BANK"||value==="BERRY_BANK"||value==="JH_BANK"){
+		console.log("AJAX 1에서 값 테스트 :" + value);
 		withdrawalBankName = value;	
 		$.ajax({
 		 
@@ -85,39 +86,34 @@ let withdrawalBankName;
 			alert('실패');
 			}
 	
-			})
-		}else{
-			console.log("값 테스트" + value);
-			withdrawalBankName = value;	
-			let bankCode;
-			if(withdrawalBankName=="SY_BANK"){
-				bankCode="01";
-			}else if(withdrawalBankName=="YK_BANK"){
-				bankCode="02";
-			}else if(withdrawalBankName=="HJ_BANK"){
-				bankCode="03";
-			}
+		})
+	}else{
+		console.log("AJAX 2에서 값 테스트 :" + value);
+		withdrawalBankName = value;	
+		let bankCode;
+		if(withdrawalBankName=="SY_BANK"){
+			bankCode="01";
+		}else if(withdrawalBankName=="YK_BANK"){
+			bankCode="02";
+		}else if(withdrawalBankName=="HJ_BANK"){
+			bankCode="03";
+		}
 			
-			$.ajax({
-			 
-				type:'post'
-				,url:'http://132.226.23.122/TeamTwoOpenAPI/AccountList.json',
-				,data:{
-					key:"FR587250820200O4HL8RQNR5" 
-					bankCode:bankCode,
-					tel:"0"+${userVO.phoneNumber}
-				},datetype:'jsonp'
-				,success:callback2			
-				,error:function(){
+		$.ajax({		 
+			type:'post'
+			,url:'http://132.226.23.122/TeamTwoOpenAPI/AccountList.json'
+			,data:{
+				key:'FR587250820200O4HL8RQNR5', 
+				bankCode:bankCode,
+				tel:"0"+${userVO.phoneNumber}
+			},datetype:'jsonp'
+			,success:callback2			
+			,error:function(){
 				alert('실패');
-				}
+			}
 		
-				})
+		})
 			
-			
-		
-		
-		
 	}
 	
 	
@@ -150,7 +146,7 @@ let withdrawalBankName;
 			let accountName = account.accountName;
 			let balance = account.balance;
 		
-			$('#MyAccount').append('<div class="col-lg-6 col-xs-12 text-center"><div class="box border border-4 rounded-3 m-5 w-75"><div><div><img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage"/></div><i class="fa fa-behance fa-3x" aria-hidden="true"></i><div class="box-title"><h3>'+ accountBankName +'</h3></div><hr><div class="box-text m-2"><h3>BALANCE</h3><h5>'+balance+' WON</h5></div><hr><div class="box-btn"><h3>TRANSFER LIMIT</h3><h5>'+transferLimit+ ' WON</h5></div><hr><div class="box-btn"><h3>BANK NAME</h3><h5>'+ accountBankName + '</h5></div><hr><div class="box-btn"><h3>ACCOUNT NUMBER</h3><h5>'+accountNumber+'</h5></div></div></div>');		 
+			$('#MyAccount').append('<div class="col-lg-6 col-xs-12 text-center"><div class="box border border-4 rounded-3 m-5 w-75"><div><div><img src="/OpenBanking/resources/images/bank.png" width="100" alt="homepage"/></div><i class="fa fa-behance fa-3x" aria-hidden="true"></i><div class="box-title"><h3>'+accountName+'</h3></div><hr><div class="box-text m-2"><h3>BALANCE</h3><h5>'+balance+' WON</h5></div><div class="box-btn"><hr></h5></div><div class="box-btn"><h3>ACCOUNT NUMBER</h3><h5>'+accountNumber+'</h5></div></div></div>');		 
 		 } 	
 	 }
 	 
