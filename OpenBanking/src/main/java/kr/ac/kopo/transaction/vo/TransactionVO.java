@@ -1,7 +1,7 @@
 package kr.ac.kopo.transaction.vo;
 
 public class TransactionVO {
-	private int tranNum;
+	private transient int tranNum;
 	private String withrawalBankCode;
 	private String depositBankCode;
 	private String withrawalName;
@@ -14,6 +14,10 @@ public class TransactionVO {
 	private String withrawalBankName;
 	private String withrawalPhoneNumber;
 	private String depositPhoneNumber;
+	
+	public TransactionVO() {
+		super();
+	}
 	public int getTranNum() {
 		return tranNum;
 	}

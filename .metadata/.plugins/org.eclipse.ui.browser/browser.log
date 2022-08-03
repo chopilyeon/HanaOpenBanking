@@ -1,0 +1,13 @@
+
+8월 02, 2022 23:01:01.423 NEW SESSION
+8월 02, 2022 23:01:01.423 [12128:17244:0802/230101.421:ERROR:device_event_log_impl.cc(214)] [23:01:01.421] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+8월 02, 2022 23:01:01.424 [12128:17244:0802/230101.422:ERROR:device_event_log_impl.cc(214)] [23:01:01.422] USB: usb_device_handle_win.cc:1048 Failed to read descriptor from node connection: 시스템에 부착된 장치가 작동하지 않습니다. (0x1F)
+8월 02, 2022 23:44:48.831 [12128:17244:0802/234448.830:ERROR:interface_endpoint_client.cc(665)] Message 0 rejected by interface blink.mojom.WidgetHost
+8월 03, 2022 24:05:22.520 [12128:17244:0803/000522.520:ERROR:fallback_task_provider.cc(124)] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/739782.
+8월 03, 2022 24:06:03.420 [12128:17244:0803/000603.420:ERROR:fallback_task_provider.cc(124)] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/739782.
+8월 03, 2022 24:06:06.574 [12128:17244:0803/000606.573:ERROR:fallback_task_provider.cc(124)] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/739782.
+8월 03, 2022 24:06:17.303 [12128:17244:0803/000617.302:ERROR:interface_endpoint_client.cc(665)] Message 0 rejected by interface blink.mojom.WidgetHost
+8월 03, 2022 24:08:23.507 [12128:17244:0803/000823.506:ERROR:fallback_task_provider.cc(124)] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/739782.
+8월 03, 2022 24:22:58.741 [12128:17244:0803/002258.741:ERROR:fallback_task_provider.cc(124)] Every renderer should have at least one task provided by a primary task provider. If a "Renderer" fallback task is shown, it is a bug. If you have repro steps, please file a new bug and tag it as a dependency of crbug.com/739782.
+8월 03, 2022 24:23:20.480 [12128:17244:0803/002320.480:ERROR:interface_endpoint_client.cc(665)] Message 1035340904 rejected by interface blink.mojom.FrameWidgetHost
+8월 03, 2022 24:23:20.484 [12128:17244:0803/002320.483:ERROR:interface_endpoint_client.cc(665)] Message 1035340904 rejected by interface blink.mojom.FrameWidgetHost

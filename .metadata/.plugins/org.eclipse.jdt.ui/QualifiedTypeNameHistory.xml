@@ -14,4 +14,6 @@
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="kr.ac.kopo.transaction.vo.TransactionVO"/>
+    <fullyQualifiedTypeName name="kr.ac.kopo.transaction.Service.TransactionService"/>
 </qualifiedTypeNameHistroy>

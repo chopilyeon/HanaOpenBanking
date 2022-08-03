@@ -171,9 +171,9 @@
 
 	
 <script>
-Highcharts.getJSON(
-	    'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/usdeur.json',
-	    function (data) {
+
+	
+
 
 	        Highcharts.chart('deposit', {
 	            chart: {
@@ -187,7 +187,10 @@ Highcharts.getJSON(
 	                    'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
 	            },
 	            xAxis: {
-	                type: 'datetime'
+	            	type:'datetime',
+	                labels:{
+	                 format:'{value:%e.%b}'
+	                }
 	            },
 	            yAxis: {
 	                title: {
@@ -225,14 +228,22 @@ Highcharts.getJSON(
 	            },
 
 	            series: [{
-	                type: 'area',
+	           		type: 'line',
+	                name: 'deposit',
+	                data: [[1656767318000,0.7537],[1656770918000,0.7537],[1656774518000,0.7559],[1656778118000,0.7631],[1656785318000,0.769],[1656871718000,0.888]]
+	            },
+	            {
+	                type: 'pie',
 	                name: 'USD to EUR',
-	                data: data
-	            }]
+	                data: [[1656767318000,0.333],[1656770918000,0.221],[1656774518000,0.444],[1656778118000,0.6655],[1656785318000,0.645],[1656871718000,0.3322]]
+	            },
+	            {
+	                type:'scatter',
+	                name: 'USD to EUR',
+	                data: [[1656767318000,0.222],[1656770918000,0.2234],[1656774518000,0.667],[1656778118000,0.1225],[1656785318000,0.3325],[1656871718000,0.34442]]
+	            }],
+	            
 	        });
-	    }
-	);
-
 
 </script>
 	

@@ -20,7 +20,9 @@ public class LoginProcessController implements Controller {
 		request.setCharacterEncoding("utf-8");
 		
 		String kakaoName = request.getParameter("kakaoName");
+		
 		MemberVO userVO;
+		MemberVO kakaoVO = new MemberVO(); 
 		
 		
 		String id = request.getParameter("id");
@@ -38,28 +40,33 @@ public class LoginProcessController implements Controller {
 		
 		if(kakaoName==null) {
 			userVO = memberService.login(memberVO);
+			System.out.println("카카오 안들어왔다");
 		}else {
 			userVO = memberService.APILogin(kakaoName);
+			kakaoVO = memberService.APILogin(kakaoName);
+			System.out.println("카카오 들어왔다");
 		}
 		
 		BankVO bankVO = new BankVO(userVO.getPhoneNumber());
 		
 		List<BankVO> bankList=bankService.checkAccount(bankVO);
 		
-		
-		
-		if(userVO!=null) {
-			
+		if(userVO != null && kakaoName == null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("userVO",userVO);
 			request.setAttribute("bankList", bankList);
-			
 			System.out.println(userVO.toString());
-			
+			System.out.println("kakaoVO가 null인 곳이다!!");
 			return "redirect:/welcome.do";
-		
-		}else {
-		
+		}else if(userVO !=null  && kakaoName != null){		
+			HttpSession session = request.getSession();			
+			session.setAttribute("kakaoVO", kakaoVO);
+			session.setAttribute("userVO",userVO);
+			request.setAttribute("bankList", bankList);
+			System.out.println(userVO.toString());			
+			System.out.println("kakaoVO 가 null이 아닌 곳이다!!");
+			return "redirect:/welcome.do";
+		}else {	
 			return "redirect:/loginFail.do";
 		}
 		

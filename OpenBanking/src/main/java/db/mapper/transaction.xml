@@ -97,7 +97,16 @@
 		 	
 	</select>
 
-
+	<select id="showDepositTransactionHistory" parameterType="string" resultType="hashmap">	
+		SELECT TRAN_DATE as tranDate ,TRAN_AMOUNT as tranAmount FROM TRANSACTION_HISTORY WHERE DEPOSIT_PHONE_NUMBER = #{phoneNumber};	
+	</select>
+	
+	<select id="showWithdrawalTransactionHistory" parameterType="string" resultType="hashmap">	
+		SELECT TRAN_DATE as tranDate,TRAN_AMOUNT as tranAmount FROM TRANSACTION_HISTORY WHERE WITHRAWAL_PHONE_NUMBER D= #{phoneNumber};	
+	</select>
+	
+	
+	
 
 
 

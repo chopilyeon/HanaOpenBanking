@@ -1,7 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-    
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+Kakao.init('2a5469364f4e047b9ce872e670e9dadb');
+console.log(Kakao.isInitialized());
+console.log("안녕하세요 topAndSide입니다");
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        	location.href = '${pageContext.request.contextPath}/logout.do'
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  } 
+</script>  
   <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -89,14 +109,22 @@
                          
                          
                          
-                    <c:if test="${ not empty userVO }">
+                    <c:if test="${ not empty userVO and empty kakaoVO}">
                         <li>
                             <a href="${pageContext.request.contextPath}/logout.do">
                               <button type="button" class="btn btn-primary btn-sm m-2">LOGOUT</button>
                             </a>
+                        </li>           
+                	 </c:if> 
+                	 
+                    <c:if test="${ not empty userVO and not empty kakaoVO}">
+                        <li>
+                             <button type="button" class="btn btn-primary btn-sm m-2" onclick="kakaoLogout()">KAKAO LOGOUT</button>              
                         </li>
                         
-                	 </c:if> 
+                	 </c:if>
+                	 
+                	 
                         <!-- ============================================================== -->
                         <!-- User profile and search -->
                         <!-- ============================================================== -->
@@ -212,4 +240,50 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
+ <!-- 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script> 
+        
+<script>
+
+Kakao.init('2a5469364f4e047b9ce872e670e9dadb'); //발급받은 키 중 javascript키를 사용해준다.
+console.log(Kakao.isInitialized()); // sdk초기화여부판단
+//카카오로그인
+function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function (response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function (response) {
+        	  console.log(response)
+        	  location.href = '${pageContext.request.contextPath}/loginProcess.do?kakaoName='+response.properties.nickname+'&email='+response.kakao_account.email
+          },
+          fail: function (error) {
+            console.log(error)
+          },
+        })
+      },
+      fail: function (error) {
+        console.log(error)
+      },
+    })
+  }
+//카카오로그아웃  
+function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function (response) {
+        	console.log(response)
+        	location.href = '${pageContext.request.contextPath}/logout.do'
+        },
+        fail: function (error) {
+          console.log(error)
+        },
+      })
+      Kakao.Auth.setAccessToken(undefined)
+    }
+  } 
+</script>
+             -->
+        
   	

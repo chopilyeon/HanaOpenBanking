@@ -102,6 +102,9 @@ public class MemberVO {
 	public String getAddress() {
 		return address;
 	}
+	public MemberVO() {
+		super();
+	}
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -175,6 +178,7 @@ public class MemberVO {
 		this.detailAddress = detailAddress;
 		this.zipCode = zipCode;
 	}
+
 	
 
 

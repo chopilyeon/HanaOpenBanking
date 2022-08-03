@@ -89,7 +89,30 @@
      </servlet-mapping> 
   	
   
+  	<servlet>
+   		<servlet-name>showWithdrawalTransactionHistory</servlet-name>
+   		<servlet-class>jsonTest.ShowWithdrawalTransactionHistory</servlet-class>
+    </servlet>
   
+  
+  
+  	<servlet-mapping>
+  		<servlet-name>showWithdrawalTransactionHistory</servlet-name>
+   		<url-pattern>/showWithdrawalTransactionHistory</url-pattern>    
+  	</servlet-mapping>
+  
+  
+  	<servlet>
+   		<servlet-name>showDepositTransactionHistory</servlet-name>
+   		<servlet-class>jsonTest.ShowDepositTransactionHistory</servlet-class>
+    </servlet>
+  
+  
+  
+  	<servlet-mapping>
+  		<servlet-name>showDepositTransactionHistory</servlet-name>
+   		<url-pattern>/showDepositTransactionHistory</url-pattern>    
+  	</servlet-mapping>
   
   
   

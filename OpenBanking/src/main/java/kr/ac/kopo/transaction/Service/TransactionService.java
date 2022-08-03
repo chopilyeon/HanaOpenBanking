@@ -25,6 +25,15 @@ public class TransactionService {
 		return withrawalTransactionList;
 	}
 	
+	public List<Map<String,Object>> showWithdrawalTransactionHistory(String phoneNumber){
+		List<Map<String,Object>> withdrawalTransactionHistory = transactionDao.checkoutWithrawalTransaction(phoneNumber);
+		return withdrawalTransactionHistory;
+	}
+	
+	public List<Map<String,Object>> showDepositTransactionHistory(String phoneNumber){
+		List<Map<String,Object>> depositTransactionHistory = transactionDao.checkoutDepositTransaction(phoneNumber);
+		return depositTransactionHistory;
+	}
 	
 	
 	

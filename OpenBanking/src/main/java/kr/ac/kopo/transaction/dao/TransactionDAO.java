@@ -33,8 +33,6 @@ public class TransactionDAO {
 		 }
 		 
 		 
-		 
-		 //return null;
 		 return depositTransactionList;	 
 	}
 	
@@ -55,13 +53,24 @@ public class TransactionDAO {
 		 }
 		 
 		 
-		 
-		 //return null;
 		 return withrawalTransactionList;	 
 	}
 	
+	public List<Map<String,Object>> showDepositTransactionHistory(String phoneNumber){
+		
+		List<Map<String,Object>> depositTransactionHistory = session.selectList("dao.TransactionDAO.showDepositTransactionHistory", phoneNumber); 
+		
+		return depositTransactionHistory;
+		
+	}
 	
-	
+	public List<Map<String,Object>> showWithdrawalTransactionHistory(String phoneNumber){
+		
+		List<Map<String,Object>> withdrawalTransactionHistory = session.selectList("dao.TransactionDAO.showWithdrawalTransactionHistory", phoneNumber); 
+		
+		return withdrawalTransactionHistory;
+		
+	}
 	
 	
 	
